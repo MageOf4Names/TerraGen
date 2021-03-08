@@ -6,4 +6,8 @@ public interface ITileGrid {
     int getWidth();
 
     int getHeight();
+
+    float getTileSize();
+
+    void setTileSize(float scale);
 }

@@ -1,9 +1,11 @@
-public class HexTileGrid implements ITileGrid {
+public class HexTileGrid extends TileGrid {
     protected HexTile[] tiles;
 
     protected int width, height;
 
-    public HexTileGrid(int width, int height) {
+    public HexTileGrid(int width, int height, float scale) {
+        super(scale);
+
         this.width = width;
         this.height = height;
 
@@ -14,6 +16,10 @@ public class HexTileGrid implements ITileGrid {
                 tiles[x * width + y] = new HexTile(new Point(x, y));
             }
         }
+    }
+
+    public HexTileGrid(int width, int height) {
+        this(width, height, 1);
     }
 
     @Override

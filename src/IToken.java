@@ -10,4 +10,8 @@ public interface IToken {
     void setColor(Color color);
 
     Color getColor();
+
+    float getScale();
+
+    void setScale(float scale);
 }

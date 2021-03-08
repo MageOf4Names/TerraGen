@@ -1,9 +1,11 @@
-public class SquareTileGrid implements ITileGrid {
+public class SquareTileGrid extends TileGrid {
     protected SquareTile[] tiles;
 
     protected int width, height;
 
-    public SquareTileGrid(int width, int height) {
+    public SquareTileGrid(int width, int height, float scale) {
+        super(scale);
+
         this.width = width;
         this.height = height;
 
@@ -14,6 +16,10 @@ public class SquareTileGrid implements ITileGrid {
                 tiles[x * width + y] = new SquareTile(new Point(x, y));
             }
         }
+    }
+
+    public SquareTileGrid(int width, int height) {
+        this(width, height, 1);
     }
 
     @Override

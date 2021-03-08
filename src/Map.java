@@ -16,4 +16,8 @@ public class Map {
     public int getHeight() {
         return grid.getHeight();
     }
+
+    public float getScale() {
+        return grid.getTileSize();
+    }
 }

@@ -1,9 +1,11 @@
 import java.awt.*;
 
 public class Token implements IToken {
-    private ITile tile;
+    protected ITile tile;
 
-    private Color color;
+    protected float scale = 1;
+
+    protected Color color;
 
     @Override
     public ITile getTile() {
@@ -28,5 +30,15 @@ public class Token implements IToken {
     @Override
     public Color getColor() {
         return color;
+    }
+
+    @Override
+    public float getScale() {
+        return scale;
+    }
+
+    @Override
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 }
