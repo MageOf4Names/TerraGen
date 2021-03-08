@@ -1,21 +1,38 @@
 public class SquareTileGrid implements ITileGrid {
+    protected SquareTile[] tiles;
+
+    protected int width, height;
+
+    public SquareTileGrid(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        tiles = new SquareTile[width * height];
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tiles[x * width + y] = new SquareTile(new Point(x, y));
+            }
+        }
+    }
+
     @Override
-    public ITile getTile(int x, int y) {
+    public SquareTile getTile(int x, int y) {
         return null;
     }
 
     @Override
-    public ITile getTile(Point location) {
-        return null;
+    public SquareTile getTile(Point location) {
+        return getTile(location.getX(), location.getY());
     }
 
     @Override
     public int getWidth() {
-        return 0;
+        return width;
     }
 
     @Override
     public int getHeight() {
-        return 0;
+        return height;
     }
 }

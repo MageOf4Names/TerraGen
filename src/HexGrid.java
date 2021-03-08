@@ -1,5 +1,5 @@
 public class HexGrid implements ITileGrid {
-    protected HexTile[] hexTiles;
+    protected HexTile[] tiles;
 
     protected int width, height;
 
@@ -7,7 +7,13 @@ public class HexGrid implements ITileGrid {
         this.width = width;
         this.height = height;
 
-        hexTiles=new HexTile[width * height];
+        tiles = new HexTile[width * height];
+
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                tiles[x * width + y] = new HexTile(new Point(x, y));
+            }
+        }
     }
 
     @Override
@@ -22,7 +28,7 @@ public class HexGrid implements ITileGrid {
 
     @Override
     public HexTile getTile(int x, int y) {
-        return hexTiles[x * width + y];
+        return tiles[x * width + y];
     }
 
     @Override
