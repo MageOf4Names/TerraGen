@@ -24,4 +24,11 @@ public class Point {
     public void setY(int y) {
         this.y = y;
     }
+
+    public Point add(Point other) {
+        if (other == null)
+            return new Point(x, y);
+
+        return new Point(x + other.x, y + other.y);
+    }
 }

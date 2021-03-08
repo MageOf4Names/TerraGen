@@ -1,9 +1,9 @@
-public class HexGrid implements ITileGrid {
+public class HexTileGrid implements ITileGrid {
     protected HexTile[] tiles;
 
     protected int width, height;
 
-    public HexGrid(int width, int height) {
+    public HexTileGrid(int width, int height) {
         this.width = width;
         this.height = height;
 

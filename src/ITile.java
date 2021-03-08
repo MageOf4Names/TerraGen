@@ -6,4 +6,6 @@ public interface ITile {
     Point getLocation();
 
     void setColor(Color color);
+
+    Color getColor();
 }
