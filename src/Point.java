@@ -25,6 +25,13 @@ public class Point {
         this.y = y;
     }
 
+    public boolean equals(Point p) {
+        if (p == null)
+            return false;
+
+        return x == p.x && y == p.y;
+    }
+
     public Point add(Point other) {
         if (other == null)
             return new Point(x, y);
