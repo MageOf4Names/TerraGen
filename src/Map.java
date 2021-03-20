@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Map {
@@ -19,5 +20,14 @@ public class Map {
 
     public float getScale() {
         return grid.getTileSize();
+    }
+
+    public void draw(Graphics2D g)
+    {
+        grid.draw(g);
+
+        for (var t : tokens) {
+            t.draw(g);
+        }
     }
 }

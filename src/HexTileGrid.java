@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class HexTileGrid extends TileGrid {
     protected HexTile[] tiles;
 
@@ -30,6 +32,11 @@ public class HexTileGrid extends TileGrid {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+
     }
 
     @Override

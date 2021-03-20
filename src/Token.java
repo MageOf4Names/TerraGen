@@ -41,4 +41,9 @@ public class Token implements IToken {
     public void setScale(float scale) {
         this.scale = scale;
     }
+
+    @Override
+    public void draw(Graphics2D g) {
+
+    }
 }

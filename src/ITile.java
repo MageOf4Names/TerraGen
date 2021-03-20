@@ -8,4 +8,6 @@ public interface ITile {
     void setColor(Color color);
 
     Color getColor();
+
+    void draw(Graphics2D g);
 }

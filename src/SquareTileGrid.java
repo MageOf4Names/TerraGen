@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class SquareTileGrid extends TileGrid {
     protected SquareTile[] tiles;
 
@@ -40,5 +42,10 @@ public class SquareTileGrid extends TileGrid {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+
     }
 }

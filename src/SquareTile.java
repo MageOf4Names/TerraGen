@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class SquareTile extends Tile {
     public SquareTile(Point location) {
         super(location);
@@ -6,5 +8,10 @@ public class SquareTile extends Tile {
     @Override
     public Point getCenter() {
         return location;
+    }
+
+    @Override
+    public void draw(Graphics2D g) {
+
     }
 }
