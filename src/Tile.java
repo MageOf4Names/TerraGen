@@ -23,4 +23,22 @@ public abstract class Tile implements ITile {
     public Color getColor() {
         return color;
     }
+
+    @Override
+    public Point getPixelLocation(float scale) {
+        int x = (int)(location.x * scale);
+        int y = (int)(location.y * scale);
+
+        return new Point(x, y);
+    }
+
+    @Override
+    public Point getPixelCenterLocation(float scale) {
+        Point c = getCenter();
+
+        int x = (int)((location.x + c.x) * scale);
+        int y = (int)((location.y + c.y) * scale);
+
+        return new Point(x, y);
+    }
 }

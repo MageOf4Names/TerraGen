@@ -5,7 +5,9 @@ import java.awt.*;
    Application main window
  */
 public class TerraGen extends JFrame {
-    protected TerraGenComponent component;
+    protected GameRenderer gameRenderer;
+
+    protected Game game;
 
     public TerraGen() {
         super("TerraGen");
@@ -16,8 +18,10 @@ public class TerraGen extends JFrame {
         // Set window to 720p
         setPreferredSize(new Dimension(1280, 720));
 
-        component = new TerraGenComponent();
-        add(component);
+        game = new Game();
+
+        gameRenderer = new GameRenderer(game);
+        add(gameRenderer);
 
         pack();
     }

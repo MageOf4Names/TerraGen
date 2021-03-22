@@ -12,6 +12,8 @@ public class SquareTile extends Tile {
 
     @Override
     public void draw(Graphics2D g, float scale) {
+        Point pos = getPixelLocation(scale);
 
+        g.drawRect(pos.x, pos.y, (int)scale, (int)scale);
     }
 }

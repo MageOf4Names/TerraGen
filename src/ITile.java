@@ -5,6 +5,10 @@ public interface ITile {
 
     Point getLocation();
 
+    Point getPixelLocation(float scale);
+
+    Point getPixelCenterLocation(float scale);
+
     void setColor(Color color);
 
     Color getColor();
