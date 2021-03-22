@@ -43,7 +43,7 @@ public class Token implements IToken {
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public void draw(Graphics2D g, float scale) {
 
     }
 }

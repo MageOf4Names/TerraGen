@@ -24,10 +24,11 @@ public class Map {
 
     public void draw(Graphics2D g)
     {
+        float scale = grid.getTileSize();
         grid.draw(g);
 
         for (var t : tokens) {
-            t.draw(g);
+            t.draw(g, scale);
         }
     }
 }

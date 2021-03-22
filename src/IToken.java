@@ -15,5 +15,5 @@ public interface IToken {
 
     void setScale(float scale);
 
-    void draw(Graphics2D g);
+    void draw(Graphics2D g, float scale);
 }

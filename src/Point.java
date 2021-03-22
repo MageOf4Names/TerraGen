@@ -38,4 +38,11 @@ public class Point {
 
         return new Point(x + other.x, y + other.y);
     }
+
+    public int distance(Point other){
+        if (other == null)
+            return Integer.MAX_VALUE;
+
+        return (int)Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
+    }
 }

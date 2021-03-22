@@ -14,4 +14,11 @@ public interface ITileGrid {
     void setTileSize(float scale);
 
     void draw(Graphics2D g);
+
+    /**
+     * Gets the closest tile to the given point
+     * @param pos location
+     * @return ITile
+     */
+    ITile getClosestTile(Point pos);
 }

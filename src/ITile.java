@@ -9,5 +9,5 @@ public interface ITile {
 
     Color getColor();
 
-    void draw(Graphics2D g);
+    void draw(Graphics2D g, float scale);
 }

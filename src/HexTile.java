@@ -11,7 +11,7 @@ public class HexTile extends Tile {
     }
 
     @Override
-    public void draw(Graphics2D g) {
+    public void draw(Graphics2D g, float scale) {
 
     }
 }

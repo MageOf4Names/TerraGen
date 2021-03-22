@@ -26,7 +26,11 @@ public class SquareTileGrid extends TileGrid {
 
     @Override
     public SquareTile getTile(int x, int y) {
-        return null;
+        // Check that the location is inside the grid
+        if(x < 0 || x >= width || y < 0 || y >= height)
+            return null;
+
+        return tiles[x * width + y];
     }
 
     @Override
@@ -46,6 +50,28 @@ public class SquareTileGrid extends TileGrid {
 
     @Override
     public void draw(Graphics2D g) {
+        for (SquareTile tile: tiles) {
+            tile.draw(g, scale);
+        }
+    }
 
+    @Override
+    public SquareTile getClosestTile(Point pos) {
+        // The current best tile
+        int bestDist = Integer.MAX_VALUE;
+        SquareTile best= null;
+
+        for (SquareTile tile: tiles) {
+            int dist = pos.distance(tile.location);
+
+            // Check if this tile is closer
+            if(best == null || dist < bestDist){
+                // Update the best tile
+                best = tile;
+                bestDist = dist;
+            }
+        }
+
+        return best;
     }
 }

@@ -36,11 +36,37 @@ public class HexTileGrid extends TileGrid {
 
     @Override
     public void draw(Graphics2D g) {
+        for (HexTile tile: tiles) {
+            tile.draw(g, scale);
+        }
+    }
 
+    @Override
+    public HexTile getClosestTile(Point pos) {
+        // The current best tile
+        int bestDist = Integer.MAX_VALUE;
+        HexTile best= null;
+
+        for (HexTile tile: tiles) {
+            int dist = pos.distance(tile.location);
+
+            // Check if this tile is closer
+            if(best == null || dist < bestDist){
+                // Update the best tile
+                best = tile;
+                bestDist = dist;
+            }
+        }
+
+        return best;
     }
 
     @Override
     public HexTile getTile(int x, int y) {
+        // Check that the location is inside the grid
+        if(x < 0 || x >= width || y < 0 || y >= height)
+            return null;
+
         return tiles[x * width + y];
     }
 
