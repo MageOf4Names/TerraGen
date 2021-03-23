@@ -5,7 +5,11 @@ public interface IToken {
 
     void setTile(ITile tile);
 
+    void setLocation(ITileGrid grid, Point location);
+
     Point getLocation();
+
+    Point getPixelLocation(float scale);
 
     void setColor(Color color);
 

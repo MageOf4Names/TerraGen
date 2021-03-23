@@ -14,6 +14,16 @@ public class SquareTile extends Tile {
     public void draw(Graphics2D g, float scale) {
         Point pos = getPixelLocation(scale);
 
-        g.drawRect(pos.x, pos.y, (int)scale, (int)scale);
+        var c = g.getColor();
+
+        // Draw fill color
+        g.setColor(color);
+        g.fillRect(pos.x, pos.y, (int)scale, (int)scale);
+
+        // Draw outline
+        g.setColor(Color.BLACK);
+        g.drawRect(pos.x,pos.y,(int)scale, (int)scale);
+
+        g.setColor(c);
     }
 }

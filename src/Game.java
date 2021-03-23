@@ -15,6 +15,10 @@ public class Game {
 
         // Default map of a 10x10 square grid
         this.map = new Map(new SquareTileGrid(10,10, 50));
+
+        map.tokens.add(new Token(map.grid, new Point(1,1), 1, Color.BLUE));
+
+        map.tokens.add(new Token(map.grid, new Point(3,4), 2, Color.orange));
     }
 
     public Game(User[] users, Map map) {

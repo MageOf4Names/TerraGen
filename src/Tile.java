@@ -3,7 +3,7 @@ import java.awt.*;
 public abstract class Tile implements ITile {
     protected Point location;
 
-    protected Color color;
+    protected Color color = Color.white;
 
     public Tile(Point location) {
         this.location = location;
