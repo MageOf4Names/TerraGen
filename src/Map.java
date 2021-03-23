@@ -25,13 +25,13 @@ public class Map {
     public void draw(Graphics2D g)
     {
         var c = g.getColor();
+        float scale = grid.getTileSize();
 
         // Draw map outline
-        g.setColor(Color.BLACK);
-        g.drawRect(0,0, getWidth(), getHeight());
+        g.setColor(Color.lightGray);
+        g.drawRect(0,0, (int)(getWidth() * scale), (int)(getHeight() * scale));
 
         // Draw tiles
-        float scale = grid.getTileSize();
         grid.draw(g);
 
         // Draw each token
