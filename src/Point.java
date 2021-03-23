@@ -6,6 +6,11 @@ public class Point {
         this.y = y;
     }
 
+    public Point(float x, float y) {
+        this.x = (int) x;
+        this.y = (int) y;
+    }
+
     public Point() {
     }
 
@@ -39,10 +44,14 @@ public class Point {
         return new Point(x + other.x, y + other.y);
     }
 
-    public int distance(Point other){
+    public int distance(Point other) {
         if (other == null)
             return Integer.MAX_VALUE;
 
-        return (int)Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
+        return (int) Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
+    }
+
+    public Point multiply(float m) {
+        return new Point(x * m, y * m);
     }
 }
