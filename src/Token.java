@@ -67,11 +67,15 @@ public class Token implements IToken {
         var size = scale * this.scale;
 
         var c = g.getColor();
-        g.setColor(color);
-
         var pos = getPixelLocation(scale);
 
+        // Draw circle outline
+        g.setColor(Color.BLACK);
         g.fillOval(pos.x, pos.y, (int)size, (int)size);
+
+        // Draw filled circle
+        g.setColor(color);
+        g.fillOval(pos.x + 3, pos.y + 3, (int)size - 6, (int)size - 6);
 
         g.setColor(c);
     }

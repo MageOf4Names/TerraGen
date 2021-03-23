@@ -24,11 +24,21 @@ public class Map {
 
     public void draw(Graphics2D g)
     {
+        var c = g.getColor();
+
+        // Draw map outline
+        g.setColor(Color.BLACK);
+        g.drawRect(0,0, getWidth(), getHeight());
+
+        // Draw tiles
         float scale = grid.getTileSize();
         grid.draw(g);
 
+        // Draw each token
         for (var t : tokens) {
             t.draw(g, scale);
         }
+
+        g.setColor(c);
     }
 }

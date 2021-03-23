@@ -19,6 +19,8 @@ public class Game {
         map.tokens.add(new Token(map.grid, new Point(1,1), 1, Color.BLUE));
 
         map.tokens.add(new Token(map.grid, new Point(3,4), 2, Color.orange));
+
+        map.grid.getTile(4, 2).setColor(Color.CYAN);
     }
 
     public Game(User[] users, Map map) {
