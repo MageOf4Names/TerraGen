@@ -48,7 +48,7 @@ public class HexTileGrid extends TileGrid {
         HexTile best= null;
 
         for (HexTile tile: tiles) {
-            int dist = pos.distance(tile.getPixelLocation(scale));
+            int dist = pos.distance(tile.getPixelCenterLocation(scale));
 
             // Check if this tile is closer
             if(best == null || dist < bestDist){

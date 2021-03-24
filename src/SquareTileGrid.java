@@ -62,7 +62,7 @@ public class SquareTileGrid extends TileGrid {
         SquareTile best= null;
 
         for (SquareTile tile: tiles) {
-            int dist = pos.distance(tile.getPixelLocation(scale));
+            int dist = pos.distance(tile.getPixelCenterLocation(scale));
 
             // Check if this tile is closer
             if(best == null || dist < bestDist){

@@ -6,8 +6,8 @@ public class HexTile extends Tile {
     }
 
     @Override
-    public Point getCenter() {
-        return location;
+    public Point getCenter(float scale) {
+        return getLocation();
     }
 
     @Override

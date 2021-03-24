@@ -8,6 +8,9 @@ public class GameRenderer extends JComponent {
         this.game = game;
 
         setLayout(new BorderLayout());
+
+        var p = new PhantomToken(game.map.grid, game.map.tokens.get(0));
+        add(p);
     }
 
     @Override

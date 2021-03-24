@@ -6,8 +6,9 @@ public class SquareTile extends Tile {
     }
 
     @Override
-    public Point getCenter() {
-        return location;
+    public Point getCenter(float scale) {
+        int a = (int) (scale / 2);
+        return new Point(a, a);
     }
 
     @Override
@@ -18,11 +19,11 @@ public class SquareTile extends Tile {
 
         // Draw fill color
         g.setColor(color);
-        g.fillRect(pos.x, pos.y, (int)scale, (int)scale);
+        g.fillRect(pos.x, pos.y, (int) scale, (int) scale);
 
         // Draw outline
         g.setColor(Color.BLACK);
-        g.drawRect(pos.x,pos.y,(int)scale, (int)scale);
+        g.drawRect(pos.x, pos.y, (int) scale, (int) scale);
 
         g.setColor(c);
     }

@@ -13,8 +13,13 @@ public class Token implements IToken {
         this.color = color;
     }
 
-    public void setLocation(ITileGrid grid,  Point location) {
+    public void setLocation(ITileGrid grid, Point location) {
         tile = grid.getClosestTile(location, grid.getTileSize());
+    }
+
+    @Override
+    public void setLocation(ITileGrid grid, ITile tile) {
+        setLocation(grid, tile.getPixelLocation(grid.getTileSize()));
     }
 
     @Override
@@ -64,11 +69,11 @@ public class Token implements IToken {
 
         // Draw circle outline
         g.setColor(Color.BLACK);
-        g.fillOval(pos.x, pos.y, (int)size, (int)size);
+        g.fillOval(pos.x, pos.y, (int) size, (int) size);
 
         // Draw filled circle
         g.setColor(color);
-        g.fillOval(pos.x + 3, pos.y + 3, (int)size - 6, (int)size - 6);
+        g.fillOval(pos.x + 3, pos.y + 3, (int) size - 6, (int) size - 6);
 
         g.setColor(c);
     }

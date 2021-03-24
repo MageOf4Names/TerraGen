@@ -34,11 +34,9 @@ public abstract class Tile implements ITile {
 
     @Override
     public Point getPixelCenterLocation(float scale) {
-        Point c = getCenter();
+        Point c = getCenter(scale);
+        Point pos = getPixelLocation(scale);
 
-        int x = (int)((location.x + c.x) * scale);
-        int y = (int)((location.y + c.y) * scale);
-
-        return new Point(x, y);
+        return new Point(pos.x + c.x, pos.y + c.y);
     }
 }

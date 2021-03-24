@@ -88,4 +88,15 @@ class PointTest {
         assertFalse(p1.equals(p4));
         assertFalse(p3.equals(p4));
     }
+
+    @Test
+    void distance() {
+        var p0 = new Point(0,0);
+        var p1 = new Point(1,1);
+        var p2 = new Point(4,4);
+
+        assertEquals(5, p0.distance(p2));
+        assertEquals(1, p0.distance(p1));
+        assertEquals(4, p1.distance(p2));
+    }
 }

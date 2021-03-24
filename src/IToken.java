@@ -7,6 +7,8 @@ public interface IToken {
 
     void setLocation(ITileGrid grid, Point location);
 
+    void setLocation(ITileGrid grid, ITile tile);
+
     Point getLocation();
 
     Point getPixelLocation(float scale);

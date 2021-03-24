@@ -52,7 +52,10 @@ public class Point {
         if (other == null)
             return Integer.MAX_VALUE;
 
-        return (int) Math.sqrt(Math.pow(x - other.x, 2) + Math.pow(y - other.y, 2));
+        double dx = x - other.x;
+        double dy = y - other.y;
+
+        return (int) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
 
     public Point multiply(float m) {

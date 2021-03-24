@@ -1,7 +1,7 @@
 import java.awt.*;
 
 public interface ITile {
-    Point getCenter();
+    Point getCenter(float scale);
 
     Point getLocation();
 
