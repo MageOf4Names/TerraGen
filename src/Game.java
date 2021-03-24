@@ -16,9 +16,13 @@ public class Game {
         // Default map of a 10x10 square grid
         this.map = new Map(new SquareTileGrid(10,10, 50));
 
-        map.tokens.add(new Token(map.grid, new Point(1,1), 1, Color.BLUE));
+        var t1 =new Token(1, Color.BLUE);
+        map.tokens.add(t1);
+        t1.setLocation(map.grid, new Point(100, 100));
 
-        map.tokens.add(new Token(map.grid, new Point(3,4), 2, Color.orange));
+        var t2 =new Token(2, Color.orange);
+        map.tokens.add(t2);
+        t2.setLocation(map.grid, new Point(200,300));
 
         map.grid.getTile(4, 2).setColor(Color.CYAN);
     }

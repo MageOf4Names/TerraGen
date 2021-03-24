@@ -42,13 +42,13 @@ public class HexTileGrid extends TileGrid {
     }
 
     @Override
-    public HexTile getClosestTile(Point pos) {
+    public HexTile getClosestTile(Point pos, float scale) {
         // The current best tile
         int bestDist = Integer.MAX_VALUE;
         HexTile best= null;
 
         for (HexTile tile: tiles) {
-            int dist = pos.distance(tile.location);
+            int dist = pos.distance(tile.getPixelLocation(scale));
 
             // Check if this tile is closer
             if(best == null || dist < bestDist){

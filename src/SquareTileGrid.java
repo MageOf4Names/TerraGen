@@ -56,13 +56,13 @@ public class SquareTileGrid extends TileGrid {
     }
 
     @Override
-    public SquareTile getClosestTile(Point pos) {
+    public SquareTile getClosestTile(Point pos, float scale) {
         // The current best tile
         int bestDist = Integer.MAX_VALUE;
         SquareTile best= null;
 
         for (SquareTile tile: tiles) {
-            int dist = pos.distance(tile.location);
+            int dist = pos.distance(tile.getPixelLocation(scale));
 
             // Check if this tile is closer
             if(best == null || dist < bestDist){

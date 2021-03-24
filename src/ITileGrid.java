@@ -20,5 +20,5 @@ public interface ITileGrid {
      * @param pos location
      * @return ITile
      */
-    ITile getClosestTile(Point pos);
+    ITile getClosestTile(Point pos, float scale);
 }

@@ -8,20 +8,13 @@ public class Token implements IToken {
 
     protected Color color;
 
-    public Token(ITileGrid grid, Point location, float scale, Color color) {
-        setLocation(grid, location);
-        this.scale = scale;
-        this.color = color;
-    }
-
-    public Token(Tile tile, float scale, Color color) {
-        setTile(tile);
+    public Token(float scale, Color color) {
         this.scale = scale;
         this.color = color;
     }
 
     public void setLocation(ITileGrid grid,  Point location) {
-        tile = grid.getClosestTile(location);
+        tile = grid.getClosestTile(location, grid.getTileSize());
     }
 
     @Override

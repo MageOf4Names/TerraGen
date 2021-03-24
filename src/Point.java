@@ -30,11 +30,15 @@ public class Point {
         this.y = y;
     }
 
-    public boolean equals(Point p) {
-        if (p == null)
-            return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-        return x == p.x && y == p.y;
+        Point point = (Point) o;
+
+        if (x != point.x) return false;
+        return y == point.y;
     }
 
     public Point add(Point other) {
