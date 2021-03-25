@@ -4,7 +4,7 @@ public class Token implements IToken {
     protected ITile tile = null;
 
     // Token size multiplier
-    protected float scale = 1f;
+    protected float scale;
 
     protected Color color;
 
@@ -13,13 +13,14 @@ public class Token implements IToken {
         this.color = color;
     }
 
+    @Override
     public void setLocation(ITileGrid grid, Point location) {
         tile = grid.getClosestTile(location, grid.getTileSize());
     }
 
     @Override
     public void setLocation(ITileGrid grid, ITile tile) {
-        setLocation(grid, tile.getPixelLocation(grid.getTileSize()));
+        setLocation(grid, tile.getPixelCenterLocation(grid.getTileSize()));
     }
 
     @Override
