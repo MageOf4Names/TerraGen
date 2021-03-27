@@ -1,17 +1,11 @@
 import java.awt.*;
 
 public interface IToken {
-    ITile getTile();
+    void setLocation(Point location);
 
-    void setTile(ITile tile);
-
-    void setLocation(ITileGrid grid, Point location);
-
-    void setLocation(ITileGrid grid, ITile tile);
+    void setLocation(ITileGrid grid, int x, int y);
 
     Point getLocation();
-
-    Point getPixelLocation(float scale);
 
     void setColor(Color color);
 

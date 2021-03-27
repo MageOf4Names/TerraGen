@@ -18,15 +18,15 @@ public class Game {
 
         var t1 = new Token(1, Color.BLUE);
         map.tokens.add(t1);
-        t1.setLocation(map.grid, new Point(100, 100));
+        t1.setLocation(map.grid,2,2);
 
         var t2 = new Token(2, Color.orange);
         map.tokens.add(t2);
-        t2.setLocation(map.grid, new Point(200, 300));
+        t2.setLocation(map.grid, 4, 7);
 
         var t3 = new Token(1, Color.BLACK);
         map.tokens.add(t3);
-        t3.setLocation(map.grid, map.grid.getTile(7, 7));
+        t3.setLocation(new Point(345, 123));
 
         map.grid.getTile(4, 2).setColor(Color.CYAN);
     }
