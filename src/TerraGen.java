@@ -11,14 +11,18 @@ public class TerraGen extends JFrame {
 
     public TerraGen() {
         super("TerraGen");
+        int scale, height, width;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
 
-        // Set window to 720p
-        setPreferredSize(new Dimension(1280, 720));
-
         game = new Game();
+        scale = game.getScale();
+        height = game.map.getHeight();
+        width = game.map.getWidth();
+
+        // Set window to 720p
+        setPreferredSize(new Dimension(scale * width + 200, scale * height + 38));
 
         gameRenderer = new GameRenderer(game);
         add(gameRenderer);

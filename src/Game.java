@@ -1,6 +1,7 @@
 import java.awt.*;
 
 public class Game {
+    private int scale = 50;
     public User[] users;
     public Map map;
 
@@ -14,7 +15,10 @@ public class Game {
         };
 
         // Default map of a 10x10 square grid
-        this.map = new Map(new SquareTileGrid(10, 10, 50));
+        this.map = new Map(new SquareTileGrid(10, 10, scale));
+
+        // Default map of a 10x10 square grid
+        //this.map = new Map(new HexTileGrid(10, 10, scale));
 
         var t1 = new Token(1, Color.BLUE);
         map.tokens.add(t1);
@@ -36,12 +40,20 @@ public class Game {
         this.map = map;
     }
 
+    public int getScale() {
+        return scale;
+    }
+
     public User[] getUsers() {
         return users;
     }
 
     public void setUsers(User[] users) {
         this.users = users;
+    }
+
+    public void setScale(int scale) {
+        this.scale = scale;
     }
 
     public void draw(Graphics2D g) {
