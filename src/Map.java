@@ -1,7 +1,8 @@
 import java.awt.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Map {
+public class Map implements Serializable {
     public ITileGrid grid;
 
     public ArrayList<Token> tokens = new ArrayList<Token>();

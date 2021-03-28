@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class GameRenderer extends JComponent {
+    public class GameRenderer extends JComponent {
     protected Game game;
 
     public GameRenderer(Game game) {
@@ -17,6 +17,6 @@ public class GameRenderer extends JComponent {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        game.draw((Graphics2D) g);
+            game.draw((Graphics2D) g);
     }
 }

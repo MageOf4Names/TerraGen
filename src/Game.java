@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Game {
+public class Game implements Serializable {
     public User[] users;
     public Map map;
 
@@ -42,6 +43,16 @@ public class Game {
 
     public void setUsers(User[] users) {
         this.users = users;
+    }
+
+    public void setGame(Game game) {
+        setUsers(game.getUsers());
+        this.map = game.getMap();
+        TerraGen.window.gameRenderer.repaint();
+    }
+
+    public Map getMap() {
+        return map;
     }
 
     public void draw(Graphics2D g) {

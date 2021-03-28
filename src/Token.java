@@ -1,6 +1,8 @@
 import java.awt.*;
+import java.io.IOException;
+import java.io.Serializable;
 
-public class Token implements IToken {
+public class    Token implements IToken, Serializable {
     protected ITile tile = null;
 
     // Token size multiplier
@@ -16,6 +18,12 @@ public class Token implements IToken {
     @Override
     public void setLocation(ITileGrid grid, Point location) {
         tile = grid.getClosestTile(location, grid.getTileSize());
+        try {
+            if (TerraGen.window.getClient() != null)
+                TerraGen.window.getClient().pushGameChange();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

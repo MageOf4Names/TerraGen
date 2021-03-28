@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class SquareTileGrid extends TileGrid {
+public class SquareTileGrid extends TileGrid implements Serializable {
     protected SquareTile[] tiles;
 
     protected int width, height;

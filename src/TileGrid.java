@@ -1,4 +1,6 @@
-public abstract class TileGrid implements ITileGrid {
+import java.io.Serializable;
+
+public abstract class TileGrid implements ITileGrid, Serializable {
     protected float scale = 1;
 
     public TileGrid(float scale) {

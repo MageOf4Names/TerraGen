@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class HexTile extends Tile {
+public class HexTile extends Tile implements Serializable {
     public HexTile(Point location) {
         super(location);
     }

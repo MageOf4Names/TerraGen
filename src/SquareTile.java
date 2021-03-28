@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class SquareTile extends Tile {
+public class SquareTile extends Tile implements Serializable {
     public SquareTile(Point location) {
         super(location);
     }

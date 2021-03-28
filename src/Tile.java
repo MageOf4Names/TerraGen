@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public abstract class Tile implements ITile {
+public abstract class Tile implements ITile, Serializable {
     protected Point location;
 
     protected Color color = Color.white;

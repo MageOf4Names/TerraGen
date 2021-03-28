@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class HexTileGrid extends TileGrid {
+public class HexTileGrid extends TileGrid implements Serializable {
     protected HexTile[] tiles;
 
     protected int width, height;

@@ -1,9 +1,10 @@
 import javax.swing.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.Serializable;
 
 // Handles dragging toke across the map
-public class PhantomToken extends JComponent {
+public class PhantomToken extends JComponent implements Serializable {
     private IToken token;
     private ITileGrid grid;
 
