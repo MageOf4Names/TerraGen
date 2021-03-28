@@ -2,8 +2,8 @@ import java.awt.*;
 import java.io.IOException;
 import java.io.Serializable;
 
-public class    Token implements IToken, Serializable {
-    protected ITile tile = null;
+public class Token implements IToken, Serializable {
+    protected Point pos = new Point(0, 0);
 
     // Token size multiplier
     protected float scale;
@@ -16,37 +16,24 @@ public class    Token implements IToken, Serializable {
     }
 
     @Override
-    public void setLocation(ITileGrid grid, Point location) {
-        tile = grid.getClosestTile(location, grid.getTileSize());
+    public void setLocation(ITileGrid grid, int x, int y) {
+        var tile = grid.getTile(x, y);
+        pos = tile.getPixelCenterLocation(grid.getTileSize());
+    }
+
+    @Override
+    public void setLocation(Point location) {
+        pos = location;
         try {
-            if (TerraGen.window.getClient() != null)
+            if (TerraGen.window != null && TerraGen.window.getClient() != null)
                 TerraGen.window.getClient().pushGameChange();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    @Override
-    public void setLocation(ITileGrid grid, ITile tile) {
-        setLocation(grid, tile.getPixelCenterLocation(grid.getTileSize()));
-    }
-
-    @Override
-    public ITile getTile() {
-        return tile;
-    }
-
-    public void setTile(ITile tile) {
-        this.tile = tile;
-    }
-
     public Point getLocation() {
-        return tile.getLocation();
-    }
-
-    @Override
-    public Point getPixelLocation(float scale) {
-        return tile.getPixelLocation(scale);
+        return pos;
     }
 
     @Override
@@ -74,15 +61,17 @@ public class    Token implements IToken, Serializable {
         var size = scale * this.scale;
 
         var c = g.getColor();
-        var pos = getPixelLocation(scale);
+
+        int x = pos.x - (int)(size / 2);
+        int y = pos.y - (int)(size / 2);
 
         // Draw circle outline
         g.setColor(Color.BLACK);
-        g.fillOval(pos.x, pos.y, (int) size, (int) size);
+        g.fillOval(x, y, (int) size, (int) size);
 
         // Draw filled circle
         g.setColor(color);
-        g.fillOval(pos.x + 3, pos.y + 3, (int) size - 6, (int) size - 6);
+        g.fillOval(x + 3, y + 3, (int) size - 6, (int) size - 6);
 
         g.setColor(c);
     }

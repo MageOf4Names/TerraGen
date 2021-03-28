@@ -24,7 +24,7 @@ public class PhantomToken extends JComponent implements Serializable {
                 var y = mouseEvent.getY() - pos.y;
 
                 tile = grid.getClosestTile(new Point(x, y), grid.getTileSize());
-                token.setLocation(grid, tile);
+                token.setLocation(tile.getPixelCenterLocation(grid.getTileSize()));
                 repaint();
             }
 

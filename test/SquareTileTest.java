@@ -27,9 +27,9 @@ class SquareTileTest {
 
     @Test
     void getPixelCenterLocation() {
-        assertEquals(s1.getPixelCenterLocation(50), new Point(25,25));
-        assertEquals(s2.getPixelCenterLocation(50), new Point(75,75));
-        assertEquals(s2.getPixelCenterLocation(50), new Point(125,325));
+        assertEquals(new Point(25,25), s1.getPixelCenterLocation(50));
+        assertEquals(new Point(75,75), s2.getPixelCenterLocation(50));
+        assertEquals(new Point(175,375), s2.getPixelCenterLocation(50));
     }
 
     @Test
