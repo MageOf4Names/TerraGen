@@ -33,7 +33,9 @@ public class MainScreen extends JComponent {
 
     private void hostGame() {
         hideComponents();
-        TerraGen.window.hostGame();
+        // call for the GridSlider window
+        TerraGen.window.add(new GridSlider());
+        TerraGen.window.pack();
     }
 
     public void switchGUIState() {

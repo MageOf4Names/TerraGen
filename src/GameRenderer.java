@@ -9,7 +9,7 @@ import java.awt.*;
 
         setLayout(new BorderLayout());
 
-        var p = new PhantomToken(game.map.grid, game.map.tokens.get(0));
+        var p = new PhantomToken(Game.map.grid, Game.map.tokens.get(0));
         add(p);
     }
 

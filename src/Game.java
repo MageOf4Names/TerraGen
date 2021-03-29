@@ -4,7 +4,7 @@ import java.io.Serializable;
 public class Game implements Serializable {
     private int scale = 50;
     public User[] users;
-    public Map map;
+    public static Map map;
 
     public Game() {
         // Default pool of 4 users
@@ -16,29 +16,15 @@ public class Game implements Serializable {
         };
 
         // Default map of a 10x10 square grid
-        this.map = new Map(new SquareTileGrid(10, 10, scale));
+        map = new Map(new SquareTileGrid(10, 10, scale));
 
         // Default map of a 10x10 square grid
         //this.map = new Map(new HexTileGrid(10, 10, scale));
-
-        var t1 = new Token(1, Color.BLUE);
-        map.tokens.add(t1);
-        t1.setLocation(map.grid,2,2);
-
-        var t2 = new Token(2, Color.orange);
-        map.tokens.add(t2);
-        t2.setLocation(map.grid, 4, 7);
-
-        var t3 = new Token(1, Color.BLACK);
-        map.tokens.add(t3);
-        t3.setLocation(new Point(345, 123));
-
-        map.grid.getTile(4, 2).setColor(Color.CYAN);
     }
 
     public Game(User[] users, Map map) {
         this.users = users;
-        this.map = map;
+        Game.map = map;
     }
 
     public int getScale() {
@@ -59,7 +45,7 @@ public class Game implements Serializable {
 
     public void setGame(Game game) {
         setUsers(game.getUsers());
-        this.map = game.getMap();
+        map = game.getMap();
         TerraGen.window.gameRenderer.repaint();
     }
 
