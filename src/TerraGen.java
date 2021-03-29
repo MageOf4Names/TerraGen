@@ -36,7 +36,6 @@ public class TerraGen extends JFrame {
     public static void main(String[] args) {
         window = new TerraGen();
 
-        //MainScreen mainScreen = new MainScreen();
         window.setVisible(true);
     }
 
