@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class GridSlider extends JComponent {
     private final ArrayList<Component> components = new ArrayList<>();
-    private int gridScale = 10;
+    private static int gridScale = 10;
     private int tileShape = 1; // tileShape = 1 if shape is set to square, tileShape = 2 if shape is set to hexagonal
 
     public GridSlider() {
@@ -132,8 +132,8 @@ public class GridSlider extends JComponent {
         addComponents();
     }
 
-    public int getGridScale() {
-        return this.gridScale;
+    public static int getGridScale() {
+        return gridScale;
     }
 
     private void addComponents() {
@@ -152,10 +152,12 @@ public class GridSlider extends JComponent {
         hideComponents();
         if (tileShape == 1) {
             Game.map = new Map(new SquareTileGrid(gridScale, gridScale, Game.map.getScale()));
+            TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 15, Game.map.getHeight() * (int) Game.map.getScale() + 40));
         } else if (tileShape == 2) {
             Game.map = new Map(new HexTileGrid(gridScale, gridScale, Game.map.getScale()));
+            /* TODO: make bottom edge flat with bottom points of Hex-grid */
+            TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 42, Game.map.getHeight() * (int) Game.map.getScale()));
         }
-        System.out.println("Created new Map with scale: " + gridScale);
         TerraGen.window.hostGame();
     }
 }
