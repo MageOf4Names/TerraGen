@@ -90,7 +90,5 @@ public class TerraGen extends JFrame {
         var t3 = new Token(1, Color.BLACK);
         Game.map.tokens.add(t3);
         t3.setLocation(new Point(345, 123));
-
-        Game.map.grid.getTile(4, 2).setColor(Color.CYAN);
     }
 }

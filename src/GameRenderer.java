@@ -1,8 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
-    public class GameRenderer extends JComponent {
+public class GameRenderer extends JComponent {
     protected Game game;
+
+    protected ArrayList<PhantomToken> phantomTokens = new ArrayList<>();
 
     public GameRenderer(Game game) {
         this.game = game;
@@ -17,6 +20,6 @@ import java.awt.*;
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-            game.draw((Graphics2D) g);
+        game.draw((Graphics2D) g);
     }
 }

@@ -1,9 +1,17 @@
 import java.awt.*;
 import java.io.Serializable;
+import java.util.Random;
 
 public class SquareTile extends Tile implements Serializable {
     public SquareTile(Point location) {
         super(location);
+
+        Random ran = new Random();
+        int r = 255 - ran.nextInt(30);
+        int g = 255 - ran.nextInt(30);
+        int b = 255 - ran.nextInt(30);
+
+        color = new Color(r, g, b);
     }
 
     @Override
