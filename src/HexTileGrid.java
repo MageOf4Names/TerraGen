@@ -63,6 +63,11 @@ public class HexTileGrid extends TileGrid implements Serializable {
     }
 
     @Override
+    public ITile getClosestTile(int x, int y) {
+        return getClosestTile(new Point(x, y), getTileSize());
+    }
+
+    @Override
     public HexTile getTile(int x, int y) {
         // Check that the location is inside the grid
         if(x < 0 || x >= width || y < 0 || y >= height)

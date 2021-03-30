@@ -75,4 +75,9 @@ public class SquareTileGrid extends TileGrid implements Serializable {
 
         return best;
     }
+
+    @Override
+    public ITile getClosestTile(int x, int y) {
+        return getClosestTile(new Point(x, y), getTileSize());
+    }
 }
