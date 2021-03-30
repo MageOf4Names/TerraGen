@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.lang.*;
 
 /**
  * Creates a window with a slider which sets the size of the grid (between 5x5 and 15x15)
@@ -155,8 +156,7 @@ public class GridSlider extends JComponent {
             TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 15, Game.map.getHeight() * (int) Game.map.getScale() + 40));
         } else if (tileShape == 2) {
             Game.map = new Map(new HexTileGrid(gridScale, gridScale, Game.map.getScale()));
-            /* TODO: make bottom edge flat with bottom points of Hex-grid */
-            TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 42, Game.map.getHeight() * (int) Game.map.getScale()));
+            TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 42,  (int) (Game.map.getHeight() * Math.sqrt(3) * 0.5 *  Game.map.getScale()) + 84));
         }
         TerraGen.window.hostGame();
     }
