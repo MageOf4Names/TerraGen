@@ -20,6 +20,7 @@ public class TerraGen extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+        setLayout(new BorderLayout());
 
         game = new Game();
         scale = game.getScale();
@@ -50,7 +51,7 @@ public class TerraGen extends JFrame {
     public void hostGame() {
         addUsers();
         gameRenderer = new GameRenderer(game);
-        add(gameRenderer);
+        add(gameRenderer, BorderLayout.CENTER);
         pack();
 
         try {
@@ -59,6 +60,8 @@ public class TerraGen extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Menu menu = new Menu();
+        add(menu, BorderLayout.EAST);
     }
 
     public void joinGame() {
@@ -76,6 +79,10 @@ public class TerraGen extends JFrame {
 
     public Client getClient() {
         return client;
+    }
+
+    public Game getGame() {
+        return this.game;
     }
 
     private void addUsers() {

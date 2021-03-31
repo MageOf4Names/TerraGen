@@ -150,14 +150,13 @@ public class GridSlider extends JComponent {
     }
 
     private void hostGame() {
-        Map map = TerraGen.window.game.getMap();
         hideComponents();
         if (tileShape == 1) {
-            TerraGen.window.game.setMap(new Map(new SquareTileGrid(gridScale, gridScale, map.getScale())));
-            TerraGen.window.setPreferredSize(new Dimension(map.getWidth() * (int) map.getScale() + 15, map.getHeight() * (int) map.getScale() + 40));
+            TerraGen.window.getGame().setMap(new Map(new SquareTileGrid(gridScale, gridScale, TerraGen.window.getGame().getMap().getScale())));
+            TerraGen.window.setPreferredSize(new Dimension(TerraGen.window.getGame().getMap().getWidth() * (int) TerraGen.window.getGame().getMap().getScale() + 15 + 200, TerraGen.window.getGame().getMap().getHeight() * (int) TerraGen.window.getGame().getMap().getScale() + 40));
         } else if (tileShape == 2) {
-            TerraGen.window.game.setMap(new Map(new HexTileGrid(gridScale, gridScale, map.getScale())));
-            TerraGen.window.setPreferredSize(new Dimension(map.getWidth() * (int) map.getScale() + 42,  (int) (map.getHeight() * Math.sqrt(3) * 0.5 *  map.getScale()) + 84));
+            TerraGen.window.getGame().setMap(new Map(new HexTileGrid(gridScale, gridScale, TerraGen.window.getGame().getMap().getScale())));
+            TerraGen.window.setPreferredSize(new Dimension(TerraGen.window.getGame().getMap().getWidth() * (int) TerraGen.window.getGame().getMap().getScale() + 42 + 200,  (int) (TerraGen.window.getGame().getMap().getHeight() * Math.sqrt(3) * 0.5 *  TerraGen.window.getGame().getMap().getScale()) + 84));
         }
         TerraGen.window.hostGame();
     }
