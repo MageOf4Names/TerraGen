@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.time.Year;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Menu extends JPanel {
@@ -105,7 +104,7 @@ public class Menu extends JPanel {
                 addTokenPanel.remove(coordinatesLabel);
                 addTokenPanel.remove(coordinatesPanel);
 
-                var t = TerraGen.window.game.addToken(x.intValue(), y.intValue());
+                var t = TerraGen.window.game.addToken(x.intValue() - 1, y.intValue() - 1);
 
                 add(newToken);
                 TerraGen.window.pack();
