@@ -12,7 +12,8 @@ public class GameRenderer extends JComponent {
 
         setLayout(new BorderLayout());
 
-        var p = new PhantomToken(TerraGen.window.game.getMap().grid, TerraGen.window.game.getMap().tokens.get(0));
+        var token = TerraGen.window.game.getClosestToken(new Point(0, 0));
+        var p = new PhantomToken(TerraGen.window.game.getMap().grid, token);
         add(p);
     }
 

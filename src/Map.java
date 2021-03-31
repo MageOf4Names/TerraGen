@@ -33,6 +33,22 @@ public class Map implements Serializable {
         return addToken(x, y, new Token());
     }
 
+    public Token getClosestToken(Point pos){
+        Token best = null;
+        float bestDist = Integer.MAX_VALUE;
+
+        for (var token: tokens){
+            var dist = pos.distance(token.getLocation());
+
+            if(best == null || dist < bestDist){
+                best = token;
+                bestDist = dist;
+            }
+        }
+
+        return best;
+    }
+
     public void draw(Graphics2D g)
     {
         var c = g.getColor();

@@ -68,6 +68,10 @@ public class Game implements Serializable {
         return map.addToken(x, y, token);
     }
 
+    public Token getClosestToken(Point pos){
+        return map.getClosestToken(pos);
+    }
+
     public void draw(Graphics2D g) {
         map.draw(g);
     }
