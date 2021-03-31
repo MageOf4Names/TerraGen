@@ -23,6 +23,16 @@ public class Map implements Serializable {
         return grid.getTileSize();
     }
 
+    public Token addToken(int x, int y, Token token){
+        tokens.add(token);
+        token.setLocation(grid, x, y);
+        return token;
+    }
+
+    public Token addToken(int x, int y){
+        return addToken(x, y, new Token());
+    }
+
     public void draw(Graphics2D g)
     {
         var c = g.getColor();

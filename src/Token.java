@@ -6,9 +6,11 @@ public class Token implements IToken, Serializable {
     protected Point pos = new Point(0, 0);
 
     // Token size multiplier
-    protected float scale;
+    protected float scale = 1;
 
-    protected Color color;
+    protected Color color = Color.GRAY;
+
+    public Token(){}
 
     public Token(float scale, Color color) {
         this.scale = scale;

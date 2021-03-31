@@ -60,6 +60,14 @@ public class Game implements Serializable {
         this.map = map;
     }
 
+    public Token addToken(int x, int y){
+        return map.addToken(x, y);
+    }
+
+    public Token addToken(int x, int y, Token token){
+        return map.addToken(x, y, token);
+    }
+
     public void draw(Graphics2D g) {
         map.draw(g);
     }
