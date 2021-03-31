@@ -1,10 +1,12 @@
 import java.awt.*;
 import java.io.Serializable;
+import java.util.concurrent.ArrayBlockingQueue;
 
 public class Game implements Serializable {
     private int scale = 50;
     public User[] users;
-    public static Map map;
+    //private ArrayBlockingQueue<Map> map;
+    private Map map;
 
     public Game() {
         // Default pool of 4 users
@@ -16,6 +18,7 @@ public class Game implements Serializable {
         };
 
         // Default map of a 10x10 square grid
+        //map = new ArrayBlockingQueue<Map>();
         map = new Map(new SquareTileGrid(10, 10, scale));
 
         // Default map of a 10x10 square grid
@@ -24,7 +27,7 @@ public class Game implements Serializable {
 
     public Game(User[] users, Map map) {
         this.users = users;
-        Game.map = map;
+        this.map = map;
     }
 
     public int getScale() {
@@ -44,13 +47,17 @@ public class Game implements Serializable {
     }
 
     public void setGame(Game game) {
-        setUsers(game.getUsers());
+        //setUsers(game.getUsers());
         map = game.getMap();
         TerraGen.window.gameRenderer.repaint();
     }
 
     public Map getMap() {
         return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public void draw(Graphics2D g) {

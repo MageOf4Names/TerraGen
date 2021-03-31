@@ -23,8 +23,8 @@ public class TerraGen extends JFrame {
 
         game = new Game();
         scale = game.getScale();
-        height = Game.map.getHeight();
-        width = Game.map.getWidth();
+        height = 10;
+        width = 10;
 
         // Set window to 720p
         setPreferredSize(new Dimension(scale * width + 200, scale * height + 38));
@@ -79,16 +79,17 @@ public class TerraGen extends JFrame {
     }
 
     private void addUsers() {
+        Map map = window.game.getMap();
         var t1 = new Token(1, Color.BLUE);
-        Game.map.tokens.add(t1);
-        t1.setLocation(Game.map.grid,2,2);
+        map.tokens.add(t1);
+        t1.setLocation(map.grid,2,2);
 
         var t2 = new Token(2, Color.orange);
-        Game.map.tokens.add(t2);
-        t2.setLocation(Game.map.grid, 4, 4);
+        map.tokens.add(t2);
+        t2.setLocation(map.grid, 4, 4);
 
         var t3 = new Token(1, Color.BLACK);
-        Game.map.tokens.add(t3);
+        map.tokens.add(t3);
         t3.setLocation(new Point(345, 123));
     }
 }

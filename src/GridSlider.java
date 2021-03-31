@@ -150,13 +150,14 @@ public class GridSlider extends JComponent {
     }
 
     private void hostGame() {
+        Map map = TerraGen.window.game.getMap();
         hideComponents();
         if (tileShape == 1) {
-            Game.map = new Map(new SquareTileGrid(gridScale, gridScale, Game.map.getScale()));
-            TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 15, Game.map.getHeight() * (int) Game.map.getScale() + 40));
+            TerraGen.window.game.setMap(new Map(new SquareTileGrid(gridScale, gridScale, map.getScale())));
+            TerraGen.window.setPreferredSize(new Dimension(map.getWidth() * (int) map.getScale() + 15, map.getHeight() * (int) map.getScale() + 40));
         } else if (tileShape == 2) {
-            Game.map = new Map(new HexTileGrid(gridScale, gridScale, Game.map.getScale()));
-            TerraGen.window.setPreferredSize(new Dimension(Game.map.getWidth() * (int) Game.map.getScale() + 42,  (int) (Game.map.getHeight() * Math.sqrt(3) * 0.5 *  Game.map.getScale()) + 84));
+            TerraGen.window.game.setMap(new Map(new HexTileGrid(gridScale, gridScale, map.getScale())));
+            TerraGen.window.setPreferredSize(new Dimension(map.getWidth() * (int) map.getScale() + 42,  (int) (map.getHeight() * Math.sqrt(3) * 0.5 *  map.getScale()) + 84));
         }
         TerraGen.window.hostGame();
     }
