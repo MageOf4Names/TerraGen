@@ -10,6 +10,8 @@ public class Token implements IToken, Serializable {
 
     protected Color color = Color.GRAY;
 
+    public boolean selected = false;
+
     public Token(){}
 
     public Token(float scale, Color color) {
@@ -69,6 +71,8 @@ public class Token implements IToken, Serializable {
 
         // Draw circle outline
         g.setColor(Color.BLACK);
+        if (selected)
+            g.setColor(Color.yellow);
         g.fillOval(x, y, (int) size, (int) size);
 
         // Draw filled circle

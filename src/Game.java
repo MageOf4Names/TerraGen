@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.io.Serializable;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -7,6 +8,9 @@ public class Game implements Serializable {
     public User[] users;
     //private ArrayBlockingQueue<Map> map;
     private Map map;
+
+    // The currently selected token
+    private Token selected = null;
 
     public Game() {
         // Default pool of 4 users
@@ -70,6 +74,34 @@ public class Game implements Serializable {
 
     public Token getClosestToken(Point pos){
         return map.getClosestToken(pos);
+    }
+
+    public void MoveToken(Token token, Point pos) {
+        var tile = map.grid.getClosestTile(pos, map.getScale());
+        token.setLocation(tile.getPixelCenterLocation(map.getScale()));
+    }
+
+    public void OnMouseClick(MouseEvent mouseEvent) {
+        var origin = map.grid.getTile(0, 0);
+        var originPos = origin.getPixelLocation(map.getScale());
+
+        var x = mouseEvent.getX() - originPos.x;
+        var y = mouseEvent.getY() - originPos.y;
+
+        var pos = new Point(x, y);
+
+        if (selected == null){
+            selected = getClosestToken(pos);
+
+            if (selected.pos.distance(pos) < map.getScale() * 2)
+                selected.selected = true;
+            else
+                selected = null;
+        }else {
+            MoveToken(selected, pos);
+            selected.selected = false;
+            selected = null;
+        }
     }
 
     public void draw(Graphics2D g) {

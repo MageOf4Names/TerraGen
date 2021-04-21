@@ -3,7 +3,6 @@ import java.awt.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Menu extends JPanel {
-
     public Menu() {
         setVisible(true);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -121,6 +120,7 @@ public class Menu extends JPanel {
             add(finalizeToken);
             TerraGen.window.pack();
         });
+
         newToken.setVisible(true);
         add(newToken);
     }
