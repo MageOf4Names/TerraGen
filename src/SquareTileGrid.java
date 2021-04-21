@@ -28,7 +28,7 @@ public class SquareTileGrid extends TileGrid implements Serializable {
     @Override
     public SquareTile getTile(int x, int y) {
         // Check that the location is inside the grid
-        if(x < 0 || x >= width || y < 0 || y >= height)
+        if (x < 0 || x >= width || y < 0 || y >= height)
             return null;
 
         return tiles[x * width + y];
@@ -51,7 +51,7 @@ public class SquareTileGrid extends TileGrid implements Serializable {
 
     @Override
     public void draw(Graphics2D g) {
-        for (SquareTile tile: tiles) {
+        for (SquareTile tile : tiles) {
             tile.draw(g, scale);
         }
     }
@@ -60,13 +60,13 @@ public class SquareTileGrid extends TileGrid implements Serializable {
     public SquareTile getClosestTile(Point pos, float scale) {
         // The current best tile
         int bestDist = Integer.MAX_VALUE;
-        SquareTile best= null;
+        SquareTile best = null;
 
-        for (SquareTile tile: tiles) {
+        for (SquareTile tile : tiles) {
             int dist = pos.distance(tile.getPixelCenterLocation(scale));
 
             // Check if this tile is closer
-            if(best == null || dist < bestDist){
+            if (best == null || dist < bestDist) {
                 // Update the best tile
                 best = tile;
                 bestDist = dist;

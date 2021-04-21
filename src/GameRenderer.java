@@ -2,12 +2,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 public class GameRenderer extends JComponent {
     protected Game game;
-
-    protected ArrayList<PhantomToken> phantomTokens = new ArrayList<>();
 
     public GameRenderer(Game game) {
         this.game = game;

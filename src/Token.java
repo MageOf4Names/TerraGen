@@ -12,7 +12,8 @@ public class Token implements IToken, Serializable {
 
     public boolean selected = false;
 
-    public Token(){}
+    public Token() {
+    }
 
     public Token(float scale, Color color) {
         this.scale = scale;
@@ -66,8 +67,8 @@ public class Token implements IToken, Serializable {
 
         var c = g.getColor();
 
-        int x = pos.x - (int)(size / 2);
-        int y = pos.y - (int)(size / 2);
+        int x = pos.x - (int) (size / 2);
+        int y = pos.y - (int) (size / 2);
 
         // Draw circle outline
         g.setColor(Color.BLACK);

@@ -37,7 +37,7 @@ public class HexTileGrid extends TileGrid implements Serializable {
 
     @Override
     public void draw(Graphics2D g) {
-        for (HexTile tile: tiles) {
+        for (HexTile tile : tiles) {
             tile.draw(g, scale);
         }
     }
@@ -46,13 +46,13 @@ public class HexTileGrid extends TileGrid implements Serializable {
     public HexTile getClosestTile(Point pos, float scale) {
         // The current best tile
         int bestDist = Integer.MAX_VALUE;
-        HexTile best= null;
+        HexTile best = null;
 
-        for (HexTile tile: tiles) {
+        for (HexTile tile : tiles) {
             int dist = pos.distance(tile.getPixelCenterLocation(scale));
 
             // Check if this tile is closer
-            if(best == null || dist < bestDist){
+            if (best == null || dist < bestDist) {
                 // Update the best tile
                 best = tile;
                 bestDist = dist;
@@ -70,7 +70,7 @@ public class HexTileGrid extends TileGrid implements Serializable {
     @Override
     public HexTile getTile(int x, int y) {
         // Check that the location is inside the grid
-        if(x < 0 || x >= width || y < 0 || y >= height)
+        if (x < 0 || x >= width || y < 0 || y >= height)
             return null;
 
         return tiles[x * width + y];

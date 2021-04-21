@@ -20,7 +20,7 @@ class SquareTileGridTest {
     @Test
     void getTile() {
         var t = g1.getTile(1,1);
-        assertEquals(t.getLocation(), new Point(1,1));
+        assertEquals(t.getGridLocation(), new Point(1,1));
     }
 
     @Test
