@@ -37,10 +37,20 @@ public class Map implements Serializable, ITileGrid {
         return grid.getTile(location);
     }
 
+    /**
+     * Get the number of tiles high the grid is
+     *
+     * @return
+     */
     public int getWidth() {
         return grid.getWidth();
     }
 
+    /**
+     * Get the number of tiles wide the grid is
+     *
+     * @return
+     */
     public int getHeight() {
         return grid.getHeight();
     }
@@ -65,20 +75,46 @@ public class Map implements Serializable, ITileGrid {
         grid.setTileSize(scale);
     }
 
+    /**
+     * Get the pixel tile size
+     *
+     * @return
+     */
     public float getScale() {
         return grid.getTileSize();
     }
 
+    /**
+     * Adds a token to this map
+     *
+     * @param x
+     * @param y
+     * @param token Token to add
+     * @return
+     */
     public Token addToken(int x, int y, Token token) {
         tokens.add(token);
         token.setLocation(grid, x, y);
         return token;
     }
 
+    /**
+     * Adds a new token to this map
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     public Token addToken(int x, int y) {
         return addToken(x, y, new Token());
     }
 
+    /**
+     * Gets the closest token to the given point
+     *
+     * @param pos Point to compare against
+     * @return
+     */
     public Token getClosestToken(Point pos) {
         Token best = null;
         float bestDist = Integer.MAX_VALUE;
@@ -86,7 +122,9 @@ public class Map implements Serializable, ITileGrid {
         for (var token : tokens) {
             var dist = pos.distance(token.getLocation());
 
+            // Check if token was closer
             if (best == null || dist < bestDist) {
+                // Update best token
                 best = token;
                 bestDist = dist;
             }
@@ -126,6 +164,13 @@ public class Map implements Serializable, ITileGrid {
         return grid.getClosestTile(pos, scale);
     }
 
+    /**
+     * Gets the closest tile to the given point
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public ITile getClosestTile(int x, int y) {
         return grid.getClosestTile(x, y);
