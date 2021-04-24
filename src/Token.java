@@ -28,14 +28,31 @@ public class Token implements IToken, Serializable {
         pos = location;
         try {
             if (TerraGen.window != null && TerraGen.window.getClient() != null)
-                TerraGen.window.getClient().pushGameChange();
+                TerraGen.window.getClient().pushGameChange(TerraGen.window.game.getMap().getTokens().indexOf(this), NetworkType.TOKEN, this);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public void setLocationNoNetworking(Point location) {
+        pos.setX(location.getX());
+        pos.setY(location.getY());
+    }
+
     public Point getLocation() {
         return pos;
+    }
+
+    public void update(){
+        setToken();
+    }
+
+    public void setToken(){
+        Token token = (Token) TerraGen.window.getClient().getNetworkContainer().getData();
+        setColor(token.getColor());
+        setLocationNoNetworking(token.getLocation());
+        setScale(token.getScale());
+        TerraGen.window.repaint();
     }
 
     @Override

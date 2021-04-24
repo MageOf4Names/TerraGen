@@ -18,6 +18,12 @@ public class GameRenderer extends JComponent {
 
     @Override
     protected void paintComponent(Graphics g) {
+        /*
+        Game newGame = TerraGen.window.getClient().getGameQueue().peek();
+        if (newGame != null)
+            //System.out.println("newgame not null");
+            game = newGame;
+        */
         super.paintComponent(g);
 
         game.draw((Graphics2D) g);

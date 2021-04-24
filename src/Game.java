@@ -48,8 +48,11 @@ public class Game implements Serializable {
 
     public void setGame(Game game) {
         //setUsers(game.getUsers());
-        map = game.getMap();
-        TerraGen.window.gameRenderer.repaint();
+        //map.setDraw(false);
+        //map.setTokens(game.getMap().getTokens());
+        //map.setDraw(true);
+        setMap(game.getMap());
+        //TerraGen.window.gameRenderer.repaint();
     }
 
     public Map getMap() {

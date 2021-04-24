@@ -1,11 +1,9 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
@@ -15,13 +13,13 @@ public class Server extends Thread {
     private ServerSocket server;
     private ArrayList<Socket> clients;
     private LinkedBlockingQueue<DataListener> dataListeners;
-    private LinkedBlockingQueue<Game> games;
+    //private LinkedBlockingQueue<NetworkContainer> networkContainers;
 
     public Server(Game game) throws IOException {
         this.server = new ServerSocket(port);
         this.clients = new ArrayList<>();
         this.dataListeners = new LinkedBlockingQueue<>();
-        this.games = new LinkedBlockingQueue<>();
+        //this.networkContainers = new LinkedBlockingQueue<>();
         this.game = game;
         start();
     }
@@ -73,13 +71,18 @@ public class Server extends Thread {
         public void run() {
             for (;;) {
                 try {
+                    //inputStream.mark(10);
                     System.out.println("In DataListener: before read object");
-                    games.put((Game) inputStream.readObject());
-                    System.out.println("In DataListener: after read object");
-                    DataWriter dataWriter = new DataWriter(client);
-                    dataWriter.start();
+                    NetworkContainer networkContainer = (NetworkContainer) inputStream.readObject();
+                        if (networkContainer != null) {
+                            //inputStream.reset();
+                        //networkContainers.put(networkContainer);
+                        System.out.println("In DataListener: after read object");
+                        DataWriter dataWriter = new DataWriter(client, networkContainer);
+                        dataWriter.start();
+                    }
 
-                } catch (IOException | ClassNotFoundException | InterruptedException e) {
+                } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
                 }
             }
@@ -112,25 +115,27 @@ public class Server extends Thread {
 
     private class DataWriter extends Thread {
         private Socket client;
+        private NetworkContainer networkContainer;
 
-        public DataWriter(Socket client) {
+        public DataWriter(Socket client, NetworkContainer networkContainer) {
             this.client = client;
+            this.networkContainer = networkContainer;
         }
 
         @Override
         public void run() {
             try {
                 System.out.println("In DataWriter: before taking game from queue");
-                Game game = games.take();
+                //NetworkContainer networkContainer = networkContainers.take();
                 System.out.println("In DataWriter: after taking game from queue");
                 System.out.println(dataListeners.size());
                 for (DataListener dataListener : dataListeners) {
                     System.out.println("In DataWriter: before write object");
                     if (dataListener.getClient() != client)
-                        dataListener.getOutputStream().writeObject(game);
+                        dataListener.getOutputStream().writeObject(networkContainer);
                     System.out.println("In DataWriter: after write object");
                 }
-            } catch (InterruptedException | IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 

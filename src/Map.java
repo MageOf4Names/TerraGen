@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class Map implements Serializable {
     public ITileGrid grid;
 
-    public ArrayList<Token> tokens = new ArrayList<Token>();
+    private Boolean draw = true;
+    public ArrayList<Token> tokens = new ArrayList<>();
 
     public Map(ITileGrid grid) {
         this.grid = grid;
@@ -35,21 +36,39 @@ public class Map implements Serializable {
 
     public void draw(Graphics2D g)
     {
-        var c = g.getColor();
-        float scale = grid.getTileSize();
+        if (draw) {
+            var c = g.getColor();
+            float scale = grid.getTileSize();
 
-        // Draw map outline
-        g.setColor(Color.lightGray);
-        g.drawRect(0,0, (int)(getWidth() * scale), (int)(getHeight() * scale));
+            // Draw map outline
+            g.setColor(Color.lightGray);
+            g.drawRect(0, 0, (int) (getWidth() * scale), (int) (getHeight() * scale));
 
-        // Draw tiles
-        grid.draw(g);
+            // Draw tiles
+            grid.draw(g);
 
-        // Draw each token
-        for (var t : tokens) {
-            t.draw(g, scale);
+            // Draw each token
+            for (var t : tokens) {
+                t.draw(g, scale);
+            }
+
+            g.setColor(c);
         }
+    }
 
-        g.setColor(c);
+    public void setTokens(ArrayList<Token> tokens) {
+        this.tokens = tokens;
+    }
+
+    public ArrayList<Token> getTokens() {
+        return tokens;
+    }
+
+    public Boolean getDraw() {
+        return draw;
+    }
+
+    public void setDraw(Boolean draw) {
+        this.draw = draw;
     }
 }

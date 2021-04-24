@@ -40,13 +40,15 @@ public class TerraGen extends JFrame {
         window.setVisible(true);
     }
 
+    /*
     public void pushGameChange() {
         try {
-            client.pushGameChange();
+            client.pushGameChange(TerraGen.window.game.getMap().getTokens().indexOf(this), NetworkType.TOKEN, this);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+     */
 
     public void hostGame() {
         addUsers();
@@ -56,7 +58,7 @@ public class TerraGen extends JFrame {
 
         try {
             server = new Server(game);
-            client = new Client("localhost", game);
+            client = new Client("localhost");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,7 +73,7 @@ public class TerraGen extends JFrame {
         pack();
 
         try {
-            client = new Client("localhost", game);
+            client = new Client("localhost");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -95,7 +97,7 @@ public class TerraGen extends JFrame {
         t2.setScale(2);
 
         var t3 = window.game.addToken(0, 0);
-        t3.setLocation(new Point(345, 123));
+        t3.setLocationNoNetworking(new Point(345, 123));
         t3.setColor(Color.BLACK);
     }
 }

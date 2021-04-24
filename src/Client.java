@@ -1,20 +1,25 @@
+import javax.swing.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Client extends Thread {
     private static final int port = 5678;
     private String hostAddress;
     private Socket socket;
-    private Game game;
+    private NetworkContainer networkContainer;
+    private LinkedBlockingQueue<Game> gameQueue;
     private ObjectOutputStream outputStream;
     private ObjectInputStream inputStream;
 
 
-    public Client(String hostAddress, Game game) throws IOException {
-        this.game = game;
+    public Client(String hostAddress) throws IOException {
         this.hostAddress = hostAddress;
+        //gameQueue = new LinkedBlockingQueue<>();
         this.start();
 
     }
@@ -37,20 +42,39 @@ public class Client extends Thread {
         while(true) {
             try {
                 System.out.println("Before setting game");
-                game.setGame((Game) inputStream.readObject());
+                //game.setGame((Game) inputStream.readObject());
+                networkContainer = (NetworkContainer) inputStream.readObject();
+                SwingUtilities.invokeAndWait(updateGame);
+                //gameQueue.put(newGame);
+                //gameQueue.take();
+                //TerraGen.window.repaint();
                 System.out.println("After setting game");
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException | InterruptedException | InvocationTargetException e) {
                 e.printStackTrace();
             }
         }
     }
 
-    public void pushGameChange() throws IOException {
+    public void pushGameChange(int index, NetworkType type, Serializable data) throws IOException {
         System.out.println("Before writing game");
-        outputStream.writeObject(game);
+        outputStream.writeObject( new NetworkContainer(type, index, data));
+        outputStream.reset();
         System.out.println("After writing game");
     }
 
+    public NetworkContainer getNetworkContainer() {
+        return networkContainer;
+    }
+
+    public void setNetworkContainer(NetworkContainer networkContainer) {
+        this.networkContainer = networkContainer;
+    }
+
+    /*
+    public LinkedBlockingQueue<Game> getGameQueue() {
+        return gameQueue;
+    }
+     */
     /*
     private class DataWriter extends Thread {
 
@@ -82,4 +106,15 @@ public class Client extends Thread {
     }
      */
 
+    final Runnable updateGame = new Runnable() {
+        @Override
+        public void run() {
+            switch (networkContainer.getType()) {
+                case TOKEN:
+                    TerraGen.window.game.getMap().tokens.get(networkContainer.getKey()).update();
+            }
+
+            //TerraGen.window.repaint();
+        }
+    };
 }
