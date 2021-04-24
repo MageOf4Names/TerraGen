@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -127,6 +128,7 @@ public class Menu extends JPanel {
                 addTokenPanel.remove(coordinatesPanel);
 
                 var t = TerraGen.window.game.addToken(x.intValue() - 1, y.intValue() - 1);
+                t.setScale(tokenSize.get());
 
                 this.add(newToken);
                 this.add(removeToken);
@@ -161,6 +163,7 @@ public class Menu extends JPanel {
             this.remove(this.removeToken);
             TerraGen.window.pack();
 
+            AtomicBoolean selectionMade = new AtomicBoolean(false);
             int i = 1;
             for (Token token : TerraGen.window.game.getMap().tokens) {
                 JButton tokenButton = new JButton("Token " + i);
@@ -168,6 +171,7 @@ public class Menu extends JPanel {
                 tokenButton.addActionListener(e1 -> {
                     selected[0] = token;
                     index.set(finalI - 1);
+                    selectionMade.set(true);
 
                     //set all other tokens "selected" tag as false
                     for (Token token1 : TerraGen.window.game.getMap().tokens) {
@@ -187,7 +191,9 @@ public class Menu extends JPanel {
 
             JButton remove = new JButton("Delete selected tile");
             remove.addActionListener(e2 -> {
-                TerraGen.window.game.getMap().tokens.remove(index.get());
+                if (selectionMade.get()) {
+                    TerraGen.window.game.getMap().tokens.remove(index.get());
+                }
 
                 for (JButton button : buttons.get()) {
                     this.remove(button);
