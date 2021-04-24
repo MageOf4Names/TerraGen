@@ -14,8 +14,14 @@ public class SquareTile extends Tile implements Serializable {
         color = new Color(r, g, b);
     }
 
+    /**
+     * Get the pixel offset to the center of this tile from its location
+     *
+     * @param scale
+     * @return
+     */
     @Override
-    public Point getCenter(float scale) {
+    public Point getCenterOffset(float scale) {
         int a = (int) (scale / 2);
         return new Point(a, a);
     }

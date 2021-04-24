@@ -1,19 +1,43 @@
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class GameRenderer extends JComponent {
     protected Game game;
-
-    protected ArrayList<PhantomToken> phantomTokens = new ArrayList<>();
 
     public GameRenderer(Game game) {
         this.game = game;
 
         setLayout(new BorderLayout());
 
-        var p = new PhantomToken(TerraGen.window.game.getMap().grid, TerraGen.window.game.getMap().tokens.get(0));
-        add(p);
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                game.OnMouseClick(mouseEvent);
+                repaint();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
     }
 
     @Override

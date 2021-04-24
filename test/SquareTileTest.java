@@ -13,9 +13,9 @@ class SquareTileTest {
 
     @Test
     void getLocation() {
-        assertEquals(s1.getLocation(), p1);
-        assertEquals(s2.getLocation(), p2);
-        assertEquals(s3.getLocation(), p3);
+        assertEquals(s1.getGridLocation(), p1);
+        assertEquals(s2.getGridLocation(), p2);
+        assertEquals(s3.getGridLocation(), p3);
     }
 
     @Test
@@ -29,13 +29,13 @@ class SquareTileTest {
     void getPixelCenterLocation() {
         assertEquals(new Point(25,25), s1.getPixelCenterLocation(50));
         assertEquals(new Point(75,75), s2.getPixelCenterLocation(50));
-        assertEquals(new Point(175,375), s2.getPixelCenterLocation(50));
+        assertEquals(new Point(175,375), s3.getPixelCenterLocation(50));
     }
 
     @Test
     void getCenter() {
-        assertEquals(s1.getCenter(50), new Point(25,25));
-        assertEquals(s2.getCenter(50), new Point(25,25));
-        assertEquals(s2.getCenter(50), new Point(25,25));
+        assertEquals(s1.getCenterOffset(50), new Point(25,25));
+        assertEquals(s2.getCenterOffset(50), new Point(25,25));
+        assertEquals(s2.getCenterOffset(50), new Point(25,25));
     }
 }

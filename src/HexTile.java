@@ -15,7 +15,7 @@ public class HexTile extends Tile implements Serializable {
     }
 
     @Override
-    public Point getCenter(float scale) {
+    public Point getCenterOffset(float scale) {
         float r = scale / 2;
         int s = (int) (r * Math.sqrt(3));
         return new Point(r, s);
@@ -37,7 +37,7 @@ public class HexTile extends Tile implements Serializable {
     @Override
     public void draw(Graphics2D g, float scale) {
         Point center = getPixelCenterLocation(scale);
-        Point offset = getCenter(scale);
+        Point offset = getCenterOffset(scale);
         var c = g.getColor();
 
         int r = (int) (scale / 2);

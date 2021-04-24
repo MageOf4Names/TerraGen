@@ -2,8 +2,10 @@ import java.awt.*;
 import java.io.Serializable;
 
 public abstract class Tile implements ITile, Serializable {
+    // This tile's location
     protected Point location;
 
+    // The color of this tile
     protected Color color = Color.white;
 
     public Tile(Point location) {
@@ -11,33 +13,41 @@ public abstract class Tile implements ITile, Serializable {
     }
 
     @Override
-    public Point getLocation() {
+    public Point getGridLocation() {
         return location;
     }
 
+    /**
+     * Set the color of this tile
+     *
+     * @param color
+     */
     @Override
     public void setColor(Color color) {
         this.color = color;
     }
 
+    /**
+     * Get the color of this tile
+     *
+     * @return
+     */
     @Override
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Get the pixel location of this tile
+     *
+     * @param scale
+     * @return
+     */
     @Override
     public Point getPixelLocation(float scale) {
-        int x = (int)(location.x * scale);
-        int y = (int)(location.y * scale);
+        int x = (int) (location.x * scale);
+        int y = (int) (location.y * scale);
 
         return new Point(x, y);
-    }
-
-    @Override
-    public Point getPixelCenterLocation(float scale) {
-        Point c = getCenter(scale);
-        Point pos = getPixelLocation(scale);
-
-        return new Point(pos.x + c.x, pos.y + c.y);
     }
 }
