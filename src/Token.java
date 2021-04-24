@@ -20,12 +20,22 @@ public class Token implements IToken, Serializable {
         this.color = color;
     }
 
+    /**
+     * Set the grid location of this token
+     * @param grid
+     * @param x
+     * @param y
+     */
     @Override
     public void setLocation(ITileGrid grid, int x, int y) {
         var tile = grid.getTile(x, y);
         pos = tile.getPixelCenterLocation(grid.getTileSize());
     }
 
+    /**
+     * Sets the location of this token
+     * @param location
+     */
     @Override
     public void setLocation(Point location) {
         pos = location;
@@ -42,6 +52,10 @@ public class Token implements IToken, Serializable {
         pos.setY(location.getY());
     }
 
+    /**
+     * Get the location of this token
+     * @return
+     */
     public Point getLocation() {
         return pos;
     }
@@ -58,21 +72,37 @@ public class Token implements IToken, Serializable {
         TerraGen.window.repaint();
     }
 
+    /**
+     * Sets the color of this token
+     * @param color
+     */
     @Override
     public void setColor(Color color) {
         this.color = color;
     }
 
+    /**
+     * Gets the color of this token
+     * @return
+     */
     @Override
     public Color getColor() {
         return color;
     }
 
+    /**
+     * Gets the scale of this token
+     * @return
+     */
     @Override
     public float getScale() {
         return scale;
     }
 
+    /**
+     * Sets the scale of this token
+     * @param scale
+     */
     @Override
     public void setScale(float scale) {
         this.scale = scale;

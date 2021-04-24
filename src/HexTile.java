@@ -6,6 +6,7 @@ public class HexTile extends Tile implements Serializable {
     public HexTile(Point location) {
         super(location);
 
+        // Generate a random color
         Random ran = new Random();
         int r = 255 - ran.nextInt(30);
         int g = 255 - ran.nextInt(30);
@@ -14,6 +15,12 @@ public class HexTile extends Tile implements Serializable {
         color = new Color(r, g, b);
     }
 
+    /**
+     * Get the pixel offset to the center of this tile from its location
+     *
+     * @param scale
+     * @return
+     */
     @Override
     public Point getCenterOffset(float scale) {
         float r = scale / 2;
@@ -21,6 +28,12 @@ public class HexTile extends Tile implements Serializable {
         return new Point(r, s);
     }
 
+    /**
+     * Get the pixel location of this tile
+     *
+     * @param scale
+     * @return
+     */
     @Override
     public Point getPixelLocation(float scale) {
         int x = (int) (location.x * scale);

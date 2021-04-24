@@ -17,7 +17,7 @@ public class Game implements Serializable {
     private Map map;
 
     // The currently selected token
-    private Token selected = null;
+    public Token selected = null;
 
     public Game() {
         // Default pool of 4 users
