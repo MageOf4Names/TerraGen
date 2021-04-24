@@ -7,11 +7,21 @@ public abstract class TileGrid implements ITileGrid, Serializable {
         this.scale = scale;
     }
 
+    /**
+     * Get the pixel tile size
+     *
+     * @return
+     */
     @Override
     public float getTileSize() {
         return scale;
     }
 
+    /**
+     * Sets the pixel tile size
+     *
+     * @param scale
+     */
     @Override
     public void setTileSize(float scale) {
         this.scale = scale;

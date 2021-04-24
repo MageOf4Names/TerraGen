@@ -16,18 +16,34 @@ public class Point implements Serializable {
     public Point() {
     }
 
+    /**
+     * Get the x coordinate
+     * @return
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * Set the x coordinate
+     * @param x
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * Get the y coordinate
+     * @return
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * Set the y coordinate
+     * @param y
+     */
     public void setY(int y) {
         this.y = y;
     }
@@ -43,6 +59,11 @@ public class Point implements Serializable {
         return y == point.y;
     }
 
+    /**
+     * Combines this point with another
+     * @param other Point to add
+     * @return
+     */
     public Point add(Point other) {
         if (other == null)
             return new Point(x, y);
@@ -50,6 +71,11 @@ public class Point implements Serializable {
         return new Point(x + other.x, y + other.y);
     }
 
+    /**
+     * Gets the distance between this point and another
+     * @param other Other point to get the distance from
+     * @return
+     */
     public int distance(Point other) {
         if (other == null)
             return Integer.MAX_VALUE;
@@ -60,6 +86,11 @@ public class Point implements Serializable {
         return (int) Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2));
     }
 
+    /**
+     * Multiplies this point by a constant
+     * @param m Multiplier
+     * @return
+     */
     public Point multiply(float m) {
         return new Point(x * m, y * m);
     }

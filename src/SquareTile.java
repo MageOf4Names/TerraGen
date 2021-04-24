@@ -6,6 +6,7 @@ public class SquareTile extends Tile implements Serializable {
     public SquareTile(Point location) {
         super(location);
 
+        // Generate a random color
         Random ran = new Random();
         int r = 255 - ran.nextInt(30);
         int g = 255 - ran.nextInt(30);

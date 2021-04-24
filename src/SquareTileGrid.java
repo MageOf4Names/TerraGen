@@ -14,6 +14,7 @@ public class SquareTileGrid extends TileGrid implements Serializable {
 
         tiles = new SquareTile[width * height];
 
+        // Populate the grid with new square tiles
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
                 tiles[x * width + y] = new SquareTile(new Point(x, y));
@@ -25,6 +26,13 @@ public class SquareTileGrid extends TileGrid implements Serializable {
         this(width, height, 1);
     }
 
+    /**
+     * Get the tile at the given x, y grid coordinates
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public SquareTile getTile(int x, int y) {
         // Check that the location is inside the grid
@@ -34,16 +42,32 @@ public class SquareTileGrid extends TileGrid implements Serializable {
         return tiles[x * width + y];
     }
 
+    /**
+     * Get the tile at the given x, y grid coordinates
+     *
+     * @param location
+     * @return
+     */
     @Override
     public SquareTile getTile(Point location) {
         return getTile(location.getX(), location.getY());
     }
 
+    /**
+     * Get the number of tiles high the grid is
+     *
+     * @return
+     */
     @Override
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Get the number of tiles wide the grid is
+     *
+     * @return
+     */
     @Override
     public int getHeight() {
         return height;
@@ -56,6 +80,12 @@ public class SquareTileGrid extends TileGrid implements Serializable {
         }
     }
 
+    /**
+     * Gets the closest tile to the given point
+     *
+     * @param pos location
+     * @return ITile
+     */
     @Override
     public SquareTile getClosestTile(Point pos, float scale) {
         // The current best tile
@@ -76,6 +106,13 @@ public class SquareTileGrid extends TileGrid implements Serializable {
         return best;
     }
 
+    /**
+     * Gets the closest tile to the given point
+     *
+     * @param x
+     * @param y
+     * @return
+     */
     @Override
     public ITile getClosestTile(int x, int y) {
         return getClosestTile(new Point(x, y), getTileSize());
