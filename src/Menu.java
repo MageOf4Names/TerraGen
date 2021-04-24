@@ -1,27 +1,50 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class Menu extends JPanel {
+    JButton newToken;
+    JButton removeToken;
+
     public Menu() {
         setVisible(true);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBounds(0,0,200,TerraGen.window.getHeight());
         setMaximumSize(new Dimension(200,TerraGen.window.getHeight()));
 
+        buildDefaultMenu();
+    }
+
+    public void buildDefaultMenu() {
+
         JLabel title = new JLabel("Menu");
-        add(title);
+        this.add(title);
 
         // whitespace
         Box.Filler filler1 = new Box.Filler(new Dimension(50,50), new Dimension(100, 20), new Dimension(100, 50));
-        add(filler1);
+        this.add(filler1);
 
         // button to add a token to the field
-        JButton newToken = new JButton("Add Token");
+        newToken = addTokenButton();
+        newToken.setVisible(true);
+        this.add(newToken);
+
+        // button to remove a token from the field
+        removeToken = deleteTokenButton();
+        removeToken.setVisible(true);
+        this.add(removeToken);
+
+    }
+
+    private JButton addTokenButton() {
+        newToken = new JButton("Add Token");
         newToken.addActionListener(e1 -> {
             AtomicInteger x = new AtomicInteger(1);
             AtomicInteger y = new AtomicInteger(1);
-            remove(newToken);
+            this.remove(this.newToken);
+            this.remove(this.removeToken);
 
             AtomicInteger tokenSize = new AtomicInteger(1);
 
@@ -95,7 +118,7 @@ public class Menu extends JPanel {
 
             JButton finalizeToken = new JButton("Finalize token");
             finalizeToken.addActionListener(e3 -> {
-                remove(finalizeToken);
+                this.remove(finalizeToken);
                 addTokenPanel.remove(tokenScaleLabel);
                 addTokenPanel.remove(tokenSizeLabel);
                 addTokenPanel.remove(tokenScale);
@@ -105,7 +128,8 @@ public class Menu extends JPanel {
 
                 var t = TerraGen.window.game.addToken(x.intValue() - 1, y.intValue() - 1);
 
-                add(newToken);
+                this.add(newToken);
+                this.add(removeToken);
                 TerraGen.window.pack();
             });
 
@@ -116,12 +140,92 @@ public class Menu extends JPanel {
             addTokenPanel.add(coordinatesLabel);
             addTokenPanel.add(coordinatesPanel);
 
-            add(addTokenPanel);
-            add(finalizeToken);
+            this.add(addTokenPanel);
+            this.add(finalizeToken);
             TerraGen.window.pack();
         });
 
-        newToken.setVisible(true);
-        add(newToken);
+        return newToken;
+    }
+
+    private JButton deleteTokenButton() {
+        final Token[] selected = {null};
+        AtomicInteger index = new AtomicInteger();
+        AtomicReference<ArrayList<JButton>> buttons = new AtomicReference<>(new ArrayList<JButton>());
+
+        AtomicReference<JButton> back = new AtomicReference<>(new JButton());
+
+        JButton deleteToken = new JButton("Delete Token");
+        deleteToken.addActionListener(e -> {
+            this.remove(this.newToken);
+            this.remove(this.removeToken);
+            TerraGen.window.pack();
+
+            int i = 1;
+            for (Token token : TerraGen.window.game.getMap().tokens) {
+                JButton tokenButton = new JButton("Token " + i);
+                int finalI = i;
+                tokenButton.addActionListener(e1 -> {
+                    selected[0] = token;
+                    index.set(finalI - 1);
+
+                    //set all other tokens "selected" tag as false
+                    for (Token token1 : TerraGen.window.game.getMap().tokens) {
+                        token1.selected = false;
+                    }
+
+                    selected[0].selected = true;
+                    TerraGen.window.repaint();
+
+                });
+                buttons.get().add(tokenButton);
+                i++;
+            }
+            for (JButton button : buttons.get()) {
+                this.add(button);
+            }
+
+            JButton remove = new JButton("Delete selected tile");
+            remove.addActionListener(e2 -> {
+                TerraGen.window.game.getMap().tokens.remove(index.get());
+
+                for (JButton button : buttons.get()) {
+                    this.remove(button);
+                }
+                this.remove(remove);
+                this.remove(back.get());
+
+                buttons.set(new ArrayList<>());
+
+                this.add(this.newToken);
+                this.add(this.removeToken);
+                TerraGen.window.repaint();
+            });
+
+            back.set(new JButton("back"));
+            back.get().addActionListener(e3 -> {
+                for (JButton button : buttons.get()) {
+                    this.remove(button);
+                }
+                buttons.set(new ArrayList<>());
+
+                //set all other tokens "selected" tag as false
+                for (Token token1 : TerraGen.window.game.getMap().tokens) {
+                    token1.selected = false;
+                }
+
+                this.remove(remove);
+                this.remove(back.get());
+                this.add(this.newToken);
+                this.add(this.removeToken);
+                TerraGen.window.pack();
+            });
+
+            this.add(remove);
+            this.add(back.get());
+            TerraGen.window.pack();
+        });
+
+        return deleteToken;
     }
 }
