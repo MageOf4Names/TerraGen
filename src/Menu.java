@@ -113,8 +113,9 @@ public class Menu extends JPanel {
             // Token Color Selection Panel
             JPanel colorPanel = new JPanel();
             colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
-            colorPanel.setMaximumSize(new Dimension(100, 50));
+            colorPanel.setMaximumSize(new Dimension(200, 50));
             JPanel setColorPanel = new JPanel();
+            setColorPanel.setMaximumSize(new Dimension(200, 50));
             setColorPanel.add(setCol);
 
             // Token Coordinates Panel
