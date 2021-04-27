@@ -105,6 +105,18 @@ public class Game implements Serializable {
     }
 
     /**
+     * Creates and adds a new token to the board with specified color
+     *
+     * @param x
+     * @param y
+     * @param color
+     * @return
+     */
+    public Token addToken(int x, int y, String color) {
+        return map.addToken(x, y, color);
+    }
+
+    /**
      * Adds a token to the board
      *
      * @param x
