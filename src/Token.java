@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.io.IOException;
 import java.io.Serializable;
+import java.lang.reflect.Field;
 
 public class Token implements IToken, Serializable {
     protected Point pos = new Point(0, 0);
@@ -8,7 +9,7 @@ public class Token implements IToken, Serializable {
     // Token size multiplier
     protected float scale = 1;
 
-    protected Color color = Color.GRAY;
+    Color color;
 
     public boolean selected = false;
 
@@ -79,6 +80,27 @@ public class Token implements IToken, Serializable {
     @Override
     public void setColor(Color color) {
         this.color = color;
+    }
+
+
+    /**
+     * setColor: Takes in a string input and runs through some try/catch statements to convert to Color
+     *
+     * @param color
+     */
+    public void setColor(String color) {
+        if (color == null) {
+            this.color = Color.black;
+        } try {
+            this.color = Color.decode(color);
+        } catch (NumberFormatException nfe) {
+            try {
+                final Field f = Color.class.getField(color);
+                this.color = (Color) f.get(null);
+            } catch (Exception e) {
+                this.color = Color.black;
+            }
+        }
     }
 
     /**
