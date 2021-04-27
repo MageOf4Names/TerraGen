@@ -140,6 +140,12 @@ public class Menu extends JPanel {
             JButton finalizeToken = new JButton("Finalize token");
 
             finalizeToken.addActionListener(e5 -> {
+                // Checks to see if the color is updated, if not, assigns the string stored in setCol.
+                if (setC.toString().equals("null")) {
+                    setC.set(setCol.getText());
+                }
+                System.out.println(setC + "check");
+
                 this.remove(finalizeToken);
                 addTokenPanel.remove(tokenScaleLabel);
                 addTokenPanel.remove(tokenSizeLabel);
