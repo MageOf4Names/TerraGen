@@ -103,6 +103,34 @@ public class Map implements Serializable, ITileGrid {
      *
      * @param x
      * @param y
+     * @param color
+     * @param token
+     * @return
+     */
+    public Token addToken(int x, int y, String color, Token token) {
+        token.setColor(color);
+        token.setLocation(grid, x, y);
+        tokens.add(token);
+        return token;
+    }
+
+    /**
+     * Adds a new token to this map
+     *
+     * @param x
+     * @param y
+     * @param color
+     * @return
+     */
+    public Token addToken(int x, int y, String color) {
+        return addToken(x, y, color, new Token());
+    }
+
+    /**
+     * Adds a new token to this map
+     *
+     * @param x
+     * @param y
      * @return
      */
     public Token addToken(int x, int y) {
