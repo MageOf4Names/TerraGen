@@ -48,6 +48,7 @@ public class Menu extends JPanel {
             this.remove(this.removeToken);
 
             AtomicInteger tokenSize = new AtomicInteger(1);
+            AtomicReference<String> setC = new AtomicReference<>();
 
             // panel for the adding token components
             JPanel addTokenPanel = new JPanel();
@@ -63,6 +64,15 @@ public class Menu extends JPanel {
                 tokenSizeLabel.setText("" + tokenSize);
             });
             tokenScale.setPreferredSize(new Dimension(5,5));
+
+            // Field for setting token color
+            JLabel tokenCol = new JLabel("Token Color: ");
+            JTextField setCol = new JTextField(10); // User input field to set token color
+            setCol.addActionListener(e3 -> {
+                String col = setCol.getText();
+                setC.set(col);
+                tokenCol.setText("Token Color: " + setC);
+            });
 
             // whitespace
             Box.Filler filler2 = new Box.Filler(new Dimension(50,20), new Dimension(50, 20), new Dimension(50, 20));
@@ -85,7 +95,6 @@ public class Menu extends JPanel {
                     coordinatesLabel.setText("coordinates: (" + x + ", " + y + ")");
                 }
             });
-
             JButton decreaseY = new JButton("-"); // button to decrease yCoordinate
             decreaseY.addActionListener(e4 -> {
                 if (y.get() > 1) {
@@ -101,33 +110,47 @@ public class Menu extends JPanel {
                 }
             });
 
+            // Token Color Selection Panel
+            JPanel colorPanel = new JPanel();
+            colorPanel.setLayout(new BoxLayout(colorPanel, BoxLayout.Y_AXIS));
+            colorPanel.setMaximumSize(new Dimension(100, 50));
+            JPanel setColorPanel = new JPanel();
+            setColorPanel.add(setCol);
+
+            // Token Coordinates Panel
             JPanel coordinatesPanel = new JPanel();
             coordinatesPanel.setLayout(new BoxLayout(coordinatesPanel, BoxLayout.Y_AXIS));
             coordinatesPanel.setMaximumSize(new Dimension(200,100));
 
+            // Token X-Coordinates Panel
             JPanel xCoordinatePanel = new JPanel();
             xCoordinatePanel.add(decreaseX);
             xCoordinatePanel.add(xLabel);
             xCoordinatePanel.add(increaseX);
             coordinatesPanel.add(xCoordinatePanel);
 
+            // Token Y-Coordinates Panel
             JPanel yCoordinatePanel = new JPanel();
             yCoordinatePanel.add(decreaseY);
             yCoordinatePanel.add(yLabel);
             yCoordinatePanel.add(increaseY);
             coordinatesPanel.add(yCoordinatePanel);
 
+            //Finalization of Token
             JButton finalizeToken = new JButton("Finalize token");
-            finalizeToken.addActionListener(e3 -> {
+
+            finalizeToken.addActionListener(e5 -> {
                 this.remove(finalizeToken);
                 addTokenPanel.remove(tokenScaleLabel);
                 addTokenPanel.remove(tokenSizeLabel);
                 addTokenPanel.remove(tokenScale);
+                addTokenPanel.remove(tokenCol);
+                addTokenPanel.remove(setColorPanel);
                 addTokenPanel.remove(filler2);
                 addTokenPanel.remove(coordinatesLabel);
                 addTokenPanel.remove(coordinatesPanel);
 
-                var t = TerraGen.window.game.addToken(x.intValue() - 1, y.intValue() - 1);
+                var t = TerraGen.window.game.addToken(x.intValue() - 1, y.intValue() - 1, setC.toString());
                 t.setScale(tokenSize.get());
 
                 this.add(newToken);
@@ -138,6 +161,8 @@ public class Menu extends JPanel {
             addTokenPanel.add(tokenScaleLabel);
             addTokenPanel.add(tokenScale);
             addTokenPanel.add(tokenSizeLabel);
+            addTokenPanel.add(tokenCol);
+            addTokenPanel.add(setColorPanel);
             addTokenPanel.add(filler2);
             addTokenPanel.add(coordinatesLabel);
             addTokenPanel.add(coordinatesPanel);
