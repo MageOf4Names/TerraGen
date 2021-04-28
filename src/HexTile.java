@@ -12,7 +12,7 @@ public class HexTile extends Tile implements Serializable {
         int g = 255 - ran.nextInt(30);
         int b = 255 - ran.nextInt(30);
 
-        color = new Color(r, g, b);
+        color = new Color(r, g, b, opacity);
     }
 
     /**

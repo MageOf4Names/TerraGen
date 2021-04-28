@@ -8,6 +8,9 @@ public abstract class Tile implements ITile, Serializable {
     // The color of this tile
     protected Color color = Color.white;
 
+    // Opacity of the tile's color.
+    protected int opacity = 100;
+
     public Tile(Point location) {
         this.location = location;
     }

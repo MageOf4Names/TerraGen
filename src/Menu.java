@@ -1,5 +1,9 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -145,7 +149,6 @@ public class Menu extends JPanel {
                 if (setC.toString().equals("null")) {
                     setC.set(setCol.getText());
                 }
-                System.out.println(setC + "check");
 
                 this.remove(finalizeToken);
                 addTokenPanel.remove(tokenScaleLabel);
@@ -265,5 +268,18 @@ public class Menu extends JPanel {
         });
 
         return deleteToken;
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        BufferedImage bg = null;
+        /* Attempts to set the background image
+        try {
+            bg = ImageIO.read(new File("src/backgrounds/menuBackground.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g.drawImage(bg, 0, 0, null);*/
     }
 }

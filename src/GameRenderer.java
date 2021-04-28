@@ -1,7 +1,11 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class GameRenderer extends JComponent {
     protected Game game;
@@ -49,6 +53,14 @@ public class GameRenderer extends JComponent {
             game = newGame;
         */
         super.paintComponent(g);
+        BufferedImage bg = null;
+        /* Attempts to set the background image
+        try {
+            bg = ImageIO.read(new File("src/backgrounds/mainBackground.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g.drawImage(bg, 0, 0, null);*/
 
         game.draw((Graphics2D) g);
     }
