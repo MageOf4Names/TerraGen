@@ -9,7 +9,8 @@ import java.lang.*;
  */
 public class GridSlider extends JComponent {
     private final ArrayList<Component> components = new ArrayList<>();
-    private static int gridScale = 10; // default size of the grid is 10x10 tiles
+    private static int gridScale = 20; // default size of the grid is 10x10 tiles
+    private static int tileScale = 30; // default size of a single tile is 50 pixels
     private int tileShape = 1; // tileShape = 1 if shape is set to square, tileShape = 2 if shape is set to hexagonal
 
     public GridSlider() {
@@ -22,48 +23,84 @@ public class GridSlider extends JComponent {
         // whitespace
         Box.Filler filler1 = new Box.Filler(
                 new Dimension(50,50),
-                new Dimension(1280, 100),
+                new Dimension(1280, 50),
                 new Dimension(1280, 400));
 
         // Slider to adjust size of grid scale
-        JSlider gridSlider = new JSlider(5,15,gridScale);
-        JLabel position = new JLabel("grid scale: " + gridScale + "x" + gridScale);
+        JSlider gridSlider = new JSlider(10,35,gridScale);
+        JLabel gridPosition = new JLabel("Grid Scale: " + gridScale + "x" + gridScale);
         gridSlider.addChangeListener(event -> {
             gridScale = gridSlider.getValue();
-            position.setText("grid scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
+            gridPosition.setText("Grid Scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
+        });
+
+        // Slider to adjust size of tile scale
+        JSlider scaleSlider = new JSlider(20,40, tileScale);
+        JLabel tilePosition = new JLabel("Tile Scale: " + tileScale);
+        scaleSlider.addChangeListener(event -> {
+            tileScale = scaleSlider.getValue();
+            tilePosition.setText("Tile Scale: " + scaleSlider.getValue());
         });
 
         // button to finalize grid scale and draw board
-        JButton sliderButton = new JButton("Apply to Grid");
+        JButton sliderButton = new JButton("Generate Map");
         sliderButton.setBounds(200,200, 50, 50);
         sliderButton.addActionListener(e -> startGame());
 
         // button to decrease slider value by 1
-        JButton decreaseScale = new JButton("-");
-        decreaseScale.setBounds(200,200, 50, 50);
-        decreaseScale.addActionListener(e -> {
-            if (gridScale > 5) {
+        JButton decreaseGridScale = new JButton("-");
+        decreaseGridScale.setBounds(200,200, 50, 50);
+        decreaseGridScale.addActionListener(e -> {
+            if (gridScale > 10) {
                 gridScale = gridScale - 1;
                 gridSlider.setValue(gridScale);
-                position.setText("grid scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
+                gridPosition.setText("Grid Scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
             }
         });
 
         // button to increase slider value by 1
-        JButton increaseScale = new JButton("+");
-        increaseScale.setBounds(200,200, 50, 50);
-        increaseScale.addActionListener(e -> {
-            if (gridScale < 15) {
+        JButton increaseGridScale = new JButton("+");
+        increaseGridScale.setBounds(200,200, 50, 50);
+        increaseGridScale.addActionListener(e -> {
+            if (gridScale < 35) {
                 gridScale = gridScale + 1;
                 gridSlider.setValue(gridScale);
-                position.setText("grid scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
+                gridPosition.setText("Grid Scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
+            }
+        });
+
+        // button to decrease tile scale value by 1
+        JButton decreaseTileScale = new JButton("-");
+        decreaseTileScale.setBounds(200,200, 50, 50);
+        decreaseTileScale.addActionListener(e -> {
+            if (tileScale > 20) {
+                tileScale = tileScale - 1;
+                scaleSlider.setValue(tileScale);
+                tilePosition.setText("Tile Scale: " + scaleSlider.getValue());
+            }
+        });
+
+        // button to increase tile scale value by 1
+        JButton increaseTileScale = new JButton("+");
+        increaseTileScale.setBounds(200,200, 50, 50);
+        increaseTileScale.addActionListener(e -> {
+            if (tileScale < 40) {
+                tileScale = tileScale + 1;
+                scaleSlider.setValue(tileScale);
+                tilePosition.setText("Tile Scale: " + scaleSlider.getValue());
             }
         });
 
         // whitespace
         Box.Filler filler2 = new Box.Filler(
                 new Dimension(50,50),
-                new Dimension(1280, 100),
+                new Dimension(1280, 30),
+                new Dimension(1280, 400));
+
+        // whitespace
+        Box.Filler filler3 = new Box.Filler(
+                new Dimension(50,50),
+                new Dimension(1280, 50),
                 new Dimension(1280, 400));
 
         // slider to decide between square or hexagonal grid
@@ -87,7 +124,7 @@ public class GridSlider extends JComponent {
         });
 
         // whitespace
-        Box.Filler filler3 = new Box.Filler(
+        Box.Filler filler4 = new Box.Filler(
                 new Dimension(50,50),
                 new Dimension(1280, 100),
                 new Dimension(1280, 400));
@@ -95,9 +132,16 @@ public class GridSlider extends JComponent {
         // panel for the size of the grid
         JPanel sizeSlider = new JPanel();
         sizeSlider.setLayout(new FlowLayout());
-        sizeSlider.add(decreaseScale);
+        sizeSlider.add(decreaseGridScale);
         sizeSlider.add(gridSlider);
-        sizeSlider.add(increaseScale);
+        sizeSlider.add(increaseGridScale);
+
+        // panel for the scale of each tile
+        JPanel tileSlider = new JPanel();
+        tileSlider.setLayout(new FlowLayout());
+        tileSlider.add(decreaseTileScale);
+        tileSlider.add(scaleSlider);
+        tileSlider.add(increaseTileScale);
 
         // panel for the shape of the tiles
         JPanel tileShapePanel = new JPanel();
@@ -109,13 +153,16 @@ public class GridSlider extends JComponent {
         JPanel sliderFrame = new JPanel();
         sliderFrame.setLayout(new FlowLayout());
         sliderFrame.add(filler1);
-        sliderFrame.add(position);
+        sliderFrame.add(gridPosition);
         sliderFrame.add(sizeSlider);
         sliderFrame.add(filler2);
+        sliderFrame.add(tilePosition);
+        sliderFrame.add(tileSlider);
+        sliderFrame.add(filler3);
         sliderFrame.add(tileShapeLabel1);
         sliderFrame.add(tileShapeLabel2);
         sliderFrame.add(tileShapePanel);
-        sliderFrame.add(filler3);
+        sliderFrame.add(filler4);
         sliderFrame.add(sliderButton);
         sliderFrame.setLayout(new BoxLayout(sliderFrame, BoxLayout.Y_AXIS));
 
@@ -134,6 +181,15 @@ public class GridSlider extends JComponent {
     }
 
     /**
+     * retrieve the scale of an individual tile
+     *
+     * @return scale of the grid
+     */
+    public static int getTileScale() {
+        return tileScale;
+    }
+
+    /**
      * hides components so that the next screen will be the board
      */
     private void hideComponents() {
@@ -147,12 +203,21 @@ public class GridSlider extends JComponent {
      */
     private void startGame() {
         hideComponents();
+        int height, width;
+        Map map = TerraGen.window.getGame().getMap();
+        /* for a square grid */
         if (tileShape == 1) {
-            TerraGen.window.getGame().setMap(new Map(new SquareTileGrid(gridScale, gridScale, TerraGen.window.getGame().getMap().getScale())));
-            TerraGen.window.setPreferredSize(new Dimension(TerraGen.window.getGame().getMap().getWidth() * (int) TerraGen.window.getGame().getMap().getScale() + 15 + 200, TerraGen.window.getGame().getMap().getHeight() * (int) TerraGen.window.getGame().getMap().getScale() + 40));
-        } else if (tileShape == 2) {
-            TerraGen.window.getGame().setMap(new Map(new HexTileGrid(gridScale, gridScale, TerraGen.window.getGame().getMap().getScale())));
-            TerraGen.window.setPreferredSize(new Dimension(TerraGen.window.getGame().getMap().getWidth() * (int) TerraGen.window.getGame().getMap().getScale() + 42 + 200,  (int) (TerraGen.window.getGame().getMap().getHeight() * Math.sqrt(3) * 0.5 *  TerraGen.window.getGame().getMap().getScale()) + 84));
+            height = gridScale * tileScale + 39;
+            width = gridScale * tileScale + 173;
+            TerraGen.window.getGame().setMap(new Map(new SquareTileGrid(gridScale, gridScale, tileScale)));
+            TerraGen.window.setPreferredSize(new Dimension(width, height));
+        }
+        /* for a hexagonal grid */
+        else if (tileShape == 2) {
+            height = (int) (gridScale * Math.sqrt(3) * 0.5 *  tileScale) + 39 + tileScale / 2;
+            width = gridScale * (int) tileScale + tileScale / 2 + 173;
+            TerraGen.window.getGame().setMap(new Map(new HexTileGrid(gridScale, gridScale, tileScale)));
+            TerraGen.window.setPreferredSize(new Dimension(width,  height));
         }
         TerraGen.window.hostGame();
     }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Map implements Serializable, ITileGrid {
     public ITileGrid grid;
 
-    public ArrayList<Token> tokens = new ArrayList<Token>();
+    public ArrayList<Token> tokens = new ArrayList<>();
 
     public Map(ITileGrid grid) {
         this.grid = grid;
@@ -17,9 +17,9 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Get the tile at the given x, y grid coordinates
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x X grid coordinate
+     * @param y Y grid coordinate
+     * @return Tile at the given coordinate
      */
     @Override
     public ITile getTile(int x, int y) {
@@ -29,8 +29,8 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Get the tile at the given x, y grid coordinates
      *
-     * @param location
-     * @return
+     * @param location Coordinate of the selection
+     * @return A single tile.
      */
     @Override
     public ITile getTile(Point location) {
@@ -40,7 +40,7 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Get the number of tiles high the grid is
      *
-     * @return
+     * @return Width of the grid
      */
     public int getWidth() {
         return grid.getWidth();
@@ -49,7 +49,7 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Get the number of tiles wide the grid is
      *
-     * @return
+     * @return Height of the grid
      */
     public int getHeight() {
         return grid.getHeight();
@@ -58,7 +58,7 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Get the pixel tile size
      *
-     * @return
+     * @return Size of a single tile
      */
     @Override
     public float getTileSize() {
@@ -67,8 +67,6 @@ public class Map implements Serializable, ITileGrid {
 
     /**
      * Sets the pixel tile size
-     *
-     * @param scale
      */
     @Override
     public void setTileSize(float scale) {
@@ -78,7 +76,7 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Get the pixel tile size
      *
-     * @return
+     * @return Scale of a single tile
      */
     public float getScale() {
         return grid.getTileSize();
@@ -87,10 +85,10 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Adds a token to this map
      *
-     * @param x
-     * @param y
+     * @param x X grid coordinate
+     * @param y Y grid coordinate
      * @param token Token to add
-     * @return
+     * @return New token
      */
     public Token addToken(int x, int y, Token token) {
         tokens.add(token);
@@ -101,11 +99,11 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Adds a new token to this map
      *
-     * @param x
-     * @param y
-     * @param color
-     * @param token
-     * @return
+     * @param x X grid coordinate
+     * @param y Y grid coordinate
+     * @param color Token color
+     * @param token Token to be added.
+     * @return New token on the grid
      */
     public Token addToken(int x, int y, String color, Token token) {
         token.setColor(color);
@@ -117,10 +115,10 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Adds a new token to this map
      *
-     * @param x
-     * @param y
-     * @param color
-     * @return
+     * @param x X grid coordinate
+     * @param y Y grid coordinate
+     * @param color Token color
+     * @return New token to be added to the grid
      */
     public Token addToken(int x, int y, String color) {
         return addToken(x, y, color, new Token());
@@ -129,9 +127,9 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Adds a new token to this map
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x X coordinate of the grid for the new token
+     * @param y Y coordinate of the grid for the new token
+     * @return Adds a new token to the map
      */
     public Token addToken(int x, int y) {
         return addToken(x, y, new Token());
@@ -141,7 +139,7 @@ public class Map implements Serializable, ITileGrid {
      * Gets the closest token to the given point
      *
      * @param pos Point to compare against
-     * @return
+     * @return Token closest to the mouse click
      */
     public Token getClosestToken(Point pos) {
         Token best = null;
@@ -184,7 +182,7 @@ public class Map implements Serializable, ITileGrid {
      * Gets the closest tile to the given point
      *
      * @param pos   location
-     * @param scale
+     * @param scale Scale of the tiles
      * @return ITile
      */
     @Override
@@ -195,9 +193,9 @@ public class Map implements Serializable, ITileGrid {
     /**
      * Gets the closest tile to the given point
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x the x coordinate of the mouse click
+     * @param y the y coordinate of the mouse click
+     * @return Returns the closest tile to the mouse click
      */
     @Override
     public ITile getClosestTile(int x, int y) {

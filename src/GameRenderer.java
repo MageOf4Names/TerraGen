@@ -54,13 +54,13 @@ public class GameRenderer extends JComponent {
         */
         super.paintComponent(g);
         BufferedImage bg = null;
-        /* Attempts to set the background image
+        /* Attempts to set the background image */
         try {
-            bg = ImageIO.read(new File("src/backgrounds/mainBackground.jpg"));
+            bg = ImageIO.read(new File("src/backgrounds/mainBackground.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        g.drawImage(bg, 0, 0, null);*/
+        g.drawImage(bg, 0, 0, null);
 
         game.draw((Graphics2D) g);
     }

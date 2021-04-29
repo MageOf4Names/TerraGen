@@ -31,9 +31,6 @@ public class Game implements Serializable {
         // Default map of a 10x10 square grid
         //map = new ArrayBlockingQueue<Map>();
         map = new Map(new SquareTileGrid(10, 10, scale));
-
-        // Default map of a 10x10 square grid
-        //this.map = new Map(new HexTileGrid(10, 10, scale));
     }
 
     public Game(User[] users, Map map) {

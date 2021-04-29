@@ -188,7 +188,7 @@ public class Menu extends JPanel {
     private JButton deleteTokenButton() {
         final Token[] selected = {null};
         AtomicInteger index = new AtomicInteger();
-        AtomicReference<ArrayList<JButton>> buttons = new AtomicReference<>(new ArrayList<JButton>());
+        AtomicReference<ArrayList<JButton>> buttons = new AtomicReference<>(new ArrayList<>());
 
         AtomicReference<JButton> back = new AtomicReference<>(new JButton());
 
@@ -274,12 +274,12 @@ public class Menu extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         BufferedImage bg = null;
-        /* Attempts to set the background image
+        /* Attempts to set the background image */
         try {
-            bg = ImageIO.read(new File("src/backgrounds/menuBackground.jpg"));
+            bg = ImageIO.read(new File("src/backgrounds/menuBackground.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        g.drawImage(bg, 0, 0, null);*/
+        g.drawImage(bg, 0, 0, null);
     }
 }

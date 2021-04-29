@@ -89,15 +89,5 @@ public class TerraGen extends JFrame {
 
     private void addUsers() {
         Map map = window.game.getMap();
-        var t1 = window.game.addToken(2, 2);
-        t1.setColor(Color.BLUE);
-
-        var t2 = window.game.addToken(4, 4);
-        t2.setColor(Color.ORANGE);
-        t2.setScale(2);
-
-        var t3 = window.game.addToken(0, 0);
-        t3.setLocationNoNetworking(new Point(345, 123));
-        t3.setColor(Color.BLACK);
     }
 }
