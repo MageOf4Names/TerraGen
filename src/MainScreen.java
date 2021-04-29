@@ -10,9 +10,8 @@ public class MainScreen extends JComponent {
     public MainScreen() {
 
         //Box.Filler filler = new Box.Filler(new Dimension(50,50), new Dimension(1280, 300), new Dimension(1280, 400));
-        Image myImage = null;
         try {
-            myImage = ImageIO.read(getClass().getResource("backgrounds/TerraGen.png"));
+            Image myImage = ImageIO.read(getClass().getResource("backgrounds/TerraGen.png"));
             ImageIcon myImageIcon = new ImageIcon(myImage);
 
             JLabel label = new JLabel(myImageIcon);
