@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -43,6 +44,15 @@ public class Server extends Thread {
                     client = server.accept();
                     if (client != null) {
                         clients.add(client);
+                        if (!dataListeners.isEmpty()) {
+                            NetworkContainer networkContainer =
+                                    new NetworkContainer(NetworkType.NEWPLAYERREQUEST, client.getInetAddress());
+                            ExclusiveDataWriter edw =
+                                    new ExclusiveDataWriter(
+                                            dataListeners.peek().getClient().getInetAddress(), networkContainer);
+                            edw.start();
+                        }
+
                         System.out.println(client);
                         DataListener dL = new DataListener(client);
                         dataListeners.add(dL);
@@ -78,9 +88,16 @@ public class Server extends Thread {
                             //inputStream.reset();
                         //networkContainers.put(networkContainer);
                         System.out.println("In DataListener: after read object");
-                        DataWriter dataWriter = new DataWriter(client, networkContainer);
-                        dataWriter.start();
-                    }
+                        if (networkContainer.getType() == NetworkType.NEWPLAYERREQUEST) {
+                            ExclusiveDataWriter exclusiveDataWriter =
+                                    new ExclusiveDataWriter(networkContainer.getTarget(), networkContainer);
+                            exclusiveDataWriter.start();
+                        } else {
+                            DataWriter dataWriter = new DataWriter(client, networkContainer);
+                            dataWriter.start();
+                        }
+
+                        }
 
                 } catch (IOException | ClassNotFoundException e) {
                     e.printStackTrace();
@@ -134,6 +151,29 @@ public class Server extends Thread {
                     if (dataListener.getClient() != client)
                         dataListener.getOutputStream().writeObject(networkContainer);
                     System.out.println("In DataWriter: after write object");
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private class ExclusiveDataWriter extends Thread {
+        private InetAddress client;
+        private NetworkContainer networkContainer;
+
+        public ExclusiveDataWriter(InetAddress client, NetworkContainer networkContainer) {
+            this.client = client;
+            this.networkContainer = networkContainer;
+        }
+
+        @Override
+        public void run() {
+            try {
+                for (DataListener dataListener : dataListeners) {
+                    if (dataListener.getClient().getInetAddress().equals(client))
+                        dataListener.getOutputStream().writeObject(networkContainer);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

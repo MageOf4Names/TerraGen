@@ -87,9 +87,9 @@ public class TerraGen extends JFrame {
      */
     public void joinGame() {
         addUsers(); // joining the game will eventually not need to initialize tokens, so this bit is temporary
-        gameRenderer = new GameRenderer(game);
-        add(gameRenderer);
-        pack();
+        //gameRenderer = new GameRenderer(game);
+        //add(gameRenderer);
+        //pack();
 
         try {
             client = new Client("localhost");
@@ -112,5 +112,15 @@ public class TerraGen extends JFrame {
 
     private void addUsers() {
         Map map = window.game.getMap();
+    }
+
+    public void loadClientGame(NetworkContainer networkContainer) {
+        GameContainer container = (GameContainer) networkContainer.getData();
+        gameRenderer = container.getGameRenderer();
+        game = container.getGame();
+        add(gameRenderer);
+        pack();
+        Menu menu = new Menu();
+        add(menu, BorderLayout.EAST);
     }
 }

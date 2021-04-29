@@ -1,3 +1,3 @@
 public enum NetworkType {
-    TOKEN
+    TOKEN, NEWPLAYERREQUEST, NEWPLAYERSEND
 }

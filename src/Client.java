@@ -62,6 +62,13 @@ public class Client extends Thread {
         System.out.println("After writing game");
     }
 
+    public void pushGameChange(NetworkContainer networkContainer) throws IOException {
+        System.out.println("Before writing game");
+        outputStream.writeObject( networkContainer);
+        outputStream.reset();
+        System.out.println("After writing game");
+    }
+
     public NetworkContainer getNetworkContainer() {
         return networkContainer;
     }
@@ -112,6 +119,19 @@ public class Client extends Thread {
             switch (networkContainer.getType()) {
                 case TOKEN:
                     TerraGen.window.game.getMap().tokens.get(networkContainer.getKey()).update();
+                    break;
+                case NEWPLAYERREQUEST:
+                    networkContainer.setData(
+                            new GameContainer(TerraGen.window.game, TerraGen.window.gameRenderer));
+                    networkContainer.setType(NetworkType.NEWPLAYERSEND);
+                    try {
+                        pushGameChange(networkContainer);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case NEWPLAYERSEND:
+                    TerraGen.window.loadClientGame(networkContainer);
             }
 
             //TerraGen.window.repaint();

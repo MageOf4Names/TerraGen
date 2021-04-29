@@ -6,8 +6,9 @@ import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
-public class GameRenderer extends JComponent {
+public class GameRenderer extends JComponent implements Serializable {
     protected Game game;
     private String bg;
 
