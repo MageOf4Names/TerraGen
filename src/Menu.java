@@ -294,7 +294,7 @@ public class Menu extends JPanel {
         BufferedImage bg = null;
         /* Attempts to set the background image */
         try {
-            bg = ImageIO.read(new File("src/backgrounds/menuBackground.png"));
+            bg = ImageIO.read(new File("src/backgrounds/menuBackground.png")); //"TerraGen/src/backgrounds/menuBackground.png"
         } catch (IOException e) {
             e.printStackTrace();
         }
