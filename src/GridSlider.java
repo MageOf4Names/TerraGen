@@ -26,20 +26,25 @@ public class GridSlider extends JComponent {
                 new Dimension(1280, 50),
                 new Dimension(1280, 400));
 
+
+        // Initialize sliders
+        JSlider scaleSlider = new JSlider(20,40, tileScale);
+        JSlider gridSlider = new JSlider(10,30,gridScale);
+
         // Slider to adjust size of grid scale
-        JSlider gridSlider = new JSlider(10,35,gridScale);
         JLabel gridPosition = new JLabel("Grid Scale: " + gridScale + "x" + gridScale);
         gridSlider.addChangeListener(event -> {
             gridScale = gridSlider.getValue();
             gridPosition.setText("Grid Scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
+            scaleSlider.setValue(40 - (gridSlider.getValue() - 10));
         });
 
         // Slider to adjust size of tile scale
-        JSlider scaleSlider = new JSlider(20,40, tileScale);
         JLabel tilePosition = new JLabel("Tile Scale: " + tileScale);
         scaleSlider.addChangeListener(event -> {
             tileScale = scaleSlider.getValue();
             tilePosition.setText("Tile Scale: " + scaleSlider.getValue());
+            gridSlider.setValue(30 - (scaleSlider.getValue() - 20));
         });
 
         // button to finalize grid scale and draw board
