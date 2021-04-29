@@ -1,5 +1,7 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainScreen extends JComponent {
@@ -7,7 +9,19 @@ public class MainScreen extends JComponent {
 
     public MainScreen() {
 
-        Box.Filler filler = new Box.Filler(new Dimension(50,50), new Dimension(1280, 300), new Dimension(1280, 400));
+        //Box.Filler filler = new Box.Filler(new Dimension(50,50), new Dimension(1280, 300), new Dimension(1280, 400));
+        Image myImage = null;
+        try {
+            myImage = ImageIO.read(getClass().getResource("backgrounds/coollogo.gif"));
+            ImageIcon myImageIcon = new ImageIcon(myImage);
+
+            JLabel label = new JLabel(myImageIcon);
+            components.add(label);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
 
         JButton hostButton = new JButton("Host");
         hostButton.setBounds(200,200, 50, 50);
@@ -18,7 +32,7 @@ public class MainScreen extends JComponent {
         joinButton.addActionListener(e -> joinGame());
         setLayout(new FlowLayout());
 
-        components.add(filler);
+        //components.add(filler);
         components.add(hostButton);
         components.add(joinButton);
         addComponents();
