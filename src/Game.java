@@ -1,5 +1,6 @@
 import java.awt.*;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -110,7 +111,14 @@ public class Game implements Serializable {
      * @return
      */
     public Token addToken(int x, int y, String color) {
-        return map.addToken(x, y, color);
+        Token token = map.addToken(x, y, color);
+        NetworkContainer container = new NetworkContainer(NetworkType.NEWTOKEN, token);
+        try {
+            TerraGen.window.getClient().pushGameChange(container);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return token;
     }
 
     /**
@@ -123,6 +131,17 @@ public class Game implements Serializable {
      */
     public Token addToken(int x, int y, Token token) {
         return map.addToken(x, y, token);
+    }
+
+    /**
+     * Adds a token to the board without pushing changes to server
+     *
+     *
+     */
+    public void addTokenNoNetworking() {
+        Token token = (Token) TerraGen.window.getClient().getNetworkContainer().getData();
+        map.addToken(token.getLocation().getX(), token.getLocation().getY(), token);
+        TerraGen.window.repaint();
     }
 
     /**

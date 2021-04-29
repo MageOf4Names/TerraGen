@@ -132,6 +132,9 @@ public class Client extends Thread {
                     break;
                 case NEWPLAYERSEND:
                     TerraGen.window.loadClientGame(networkContainer);
+                    break;
+                case NEWTOKEN:
+                    TerraGen.window.game.addTokenNoNetworking();
             }
 
             //TerraGen.window.repaint();
