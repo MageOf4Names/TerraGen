@@ -16,16 +16,16 @@ public class TerraGen extends JFrame {
 
     public TerraGen() {
         super("TerraGen");
-        int scale, height, width;
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
+
         setLayout(new BorderLayout());
 
         game = new Game();
-        scale = game.getScale();
-        height = 10;
-        width = 10;
+        int scale = game.getScale();
+        int height = 10;
+        int width = 10;
 
         // Set window to 720p
         setPreferredSize(new Dimension(scale * width + 200, scale * height + 38));
@@ -50,6 +50,21 @@ public class TerraGen extends JFrame {
     }
      */
 
+    /**
+     * Returns the window to the main screen
+     */
+    public void mainScreen(){
+        setVisible(false);
+        window = new TerraGen();
+        window.setVisible(true);
+        client = null;
+        server = null;
+        gameRenderer = null;
+    }
+
+    /**
+     * Start new game as a host
+     */
     public void hostGame() {
         addUsers();
         gameRenderer = new GameRenderer(game);
@@ -66,6 +81,9 @@ public class TerraGen extends JFrame {
         add(menu, BorderLayout.EAST);
     }
 
+    /**
+     * Connect to an existing game
+     */
     public void joinGame() {
         addUsers(); // joining the game will eventually not need to initialize tokens, so this bit is temporary
         gameRenderer = new GameRenderer(game);

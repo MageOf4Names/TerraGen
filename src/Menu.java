@@ -1,6 +1,8 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +28,15 @@ public class Menu extends JPanel {
 
         JLabel title = new JLabel("Menu");
         this.add(title);
+
+        JButton mainMenu = new JButton("Main Menu");
+        mainMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                TerraGen.window.mainScreen();
+            }
+        });
+        this.add(mainMenu);
 
         // whitespace
         Box.Filler filler1 = new Box.Filler(new Dimension(50,50), new Dimension(100, 20), new Dimension(100, 50));
@@ -153,7 +164,7 @@ public class Menu extends JPanel {
                     // Add the starting '#' symbol if not present
                     if (!c.startsWith("#"))
                         c = "#" + c;
-                    
+
                     setC.set(c);
                 }
 
