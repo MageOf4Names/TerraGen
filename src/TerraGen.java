@@ -118,7 +118,9 @@ public class TerraGen extends JFrame {
         GameContainer container = (GameContainer) networkContainer.getData();
         gameRenderer = container.getGameRenderer();
         game = container.getGame();
+        gameRenderer.registerMouse();
         add(gameRenderer);
+
 
         Menu menu = new Menu();
         add(menu, BorderLayout.EAST);
