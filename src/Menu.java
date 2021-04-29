@@ -147,7 +147,14 @@ public class Menu extends JPanel {
             finalizeToken.addActionListener(e5 -> {
                 // Checks to see if the color is updated, if not, assigns the string stored in setCol.
                 if (setC.toString().equals("null")) {
-                    setC.set(setCol.getText());
+                    // Get token hex color string
+                    String c = setCol.getText();
+
+                    // Add the starting '#' symbol if not present
+                    if (!c.startsWith("#"))
+                        c = "#" + c;
+                    
+                    setC.set(c);
                 }
 
                 this.remove(finalizeToken);
