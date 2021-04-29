@@ -14,6 +14,9 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Menu extends JPanel {
     JButton newToken;
     JButton removeToken;
+    JButton mainMenu;
+    Box.Filler filler1;
+    Box.Filler filler2;
     Color labelTextColor = Color.YELLOW;
     Color labelBGColor = Color.BLACK;
 
@@ -34,17 +37,8 @@ public class Menu extends JPanel {
         title.setOpaque(true);
         this.add(title);
 
-        JButton mainMenu = new JButton("Main Menu");
-        mainMenu.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                TerraGen.window.mainScreen();
-            }
-        });
-        this.add(mainMenu);
-
         // whitespace
-        Box.Filler filler1 = new Box.Filler(new Dimension(50,50), new Dimension(100, 20), new Dimension(100, 50));
+        filler1 = new Box.Filler(new Dimension(50,50), new Dimension(100, 20), new Dimension(100, 50));
         this.add(filler1);
 
         // button to add a token to the field
@@ -57,6 +51,19 @@ public class Menu extends JPanel {
         removeToken.setVisible(true);
         this.add(removeToken);
 
+
+        mainMenu = new JButton("Main Menu");
+        mainMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                TerraGen.window.mainScreen();
+            }
+        });
+        // whitespace
+        filler2 = new Box.Filler(new Dimension(50,50), new Dimension(100, 20), new Dimension(100, 50));
+        this.add(filler2);
+        this.add(mainMenu);
+
     }
 
     private JButton addTokenButton() {
@@ -66,6 +73,8 @@ public class Menu extends JPanel {
             AtomicInteger y = new AtomicInteger(1);
             this.remove(this.newToken);
             this.remove(this.removeToken);
+            this.remove(filler2);
+            this.remove(mainMenu);
 
             AtomicInteger tokenSize = new AtomicInteger(1);
             AtomicReference<String> setC = new AtomicReference<>();
@@ -74,20 +83,16 @@ public class Menu extends JPanel {
             JPanel addTokenPanel = new JPanel();
             addTokenPanel.setLayout(new BoxLayout(addTokenPanel, BoxLayout.Y_AXIS));
 
-            JLabel tokenScaleLabel = new JLabel("Choose Token Scale:     ");
+            JLabel tokenScaleLabel = new JLabel("Choose Token Scale: " + tokenSize);
             tokenScaleLabel.setForeground(labelTextColor);
             tokenScaleLabel.setBackground(labelBGColor);
             tokenScaleLabel.setOpaque(true);
-            JLabel tokenSizeLabel = new JLabel("" + tokenSize);
-            tokenSizeLabel.setForeground(labelTextColor);
-            tokenSizeLabel.setBackground(labelBGColor);
-            tokenSizeLabel.setOpaque(true);
 
             // slider for deciding token scale
             JSlider tokenScale = new JSlider(1,2,1);
             tokenScale.addChangeListener(e2 -> {
                 tokenSize.set(tokenScale.getValue());
-                tokenSizeLabel.setText("" + tokenSize);
+                tokenScaleLabel.setText("Choose Token Scale: " + tokenSize);
             });
             tokenScale.setOpaque(false);
             tokenScale.setPreferredSize(new Dimension(5,5));
@@ -105,7 +110,7 @@ public class Menu extends JPanel {
             });
 
             // whitespace
-            Box.Filler filler2 = new Box.Filler(new Dimension(50,20), new Dimension(50, 20), new Dimension(50, 20));
+            Box.Filler filler0 = new Box.Filler(new Dimension(50,20), new Dimension(50, 20), new Dimension(50, 20));
 
             // Fields for determining coordinates
             JLabel coordinatesLabel = new JLabel("coordinates: (" + x + ", " + y + ")");
@@ -199,11 +204,10 @@ public class Menu extends JPanel {
 
                 this.remove(finalizeToken);
                 addTokenPanel.remove(tokenScaleLabel);
-                addTokenPanel.remove(tokenSizeLabel);
                 addTokenPanel.remove(tokenScale);
                 addTokenPanel.remove(tokenCol);
                 addTokenPanel.remove(setColorPanel);
-                addTokenPanel.remove(filler2);
+                addTokenPanel.remove(filler0);
                 addTokenPanel.remove(coordinatesLabel);
                 addTokenPanel.remove(coordinatesPanel);
 
@@ -212,12 +216,14 @@ public class Menu extends JPanel {
 
                 this.add(newToken);
                 this.add(removeToken);
+                // whitespace
+                this.add(filler2);
+                this.add(mainMenu);
                 TerraGen.window.pack();
             });
 
             addTokenPanel.add(tokenScaleLabel);
             addTokenPanel.add(tokenScale);
-            addTokenPanel.add(tokenSizeLabel);
             addTokenPanel.add(tokenCol);
             addTokenPanel.add(setColorPanel);
             addTokenPanel.add(filler2);
@@ -244,6 +250,7 @@ public class Menu extends JPanel {
         deleteToken.addActionListener(e -> {
             this.remove(this.newToken);
             this.remove(this.removeToken);
+            this.remove(mainMenu);
             TerraGen.window.pack();
 
             AtomicBoolean selectionMade = new AtomicBoolean(false);
@@ -288,6 +295,8 @@ public class Menu extends JPanel {
 
                 this.add(this.newToken);
                 this.add(this.removeToken);
+                this.add(filler2);
+                this.add(mainMenu);
                 TerraGen.window.repaint();
             });
 
@@ -307,6 +316,8 @@ public class Menu extends JPanel {
                 this.remove(back.get());
                 this.add(this.newToken);
                 this.add(this.removeToken);
+                this.add(filler2);
+                this.add(mainMenu);
                 TerraGen.window.pack();
             });
 
