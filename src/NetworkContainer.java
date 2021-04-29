@@ -18,6 +18,11 @@ public class NetworkContainer implements Serializable {
         this.target = target;
     }
 
+    public NetworkContainer(NetworkType type, Serializable data) {
+        this.type = type;
+        this.data = data;
+    }
+
     public NetworkType getType() {
         return type;
     }
