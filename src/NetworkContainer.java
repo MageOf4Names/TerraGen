@@ -5,6 +5,7 @@ public class NetworkContainer implements Serializable {
     private NetworkType type;
     private Integer key;
     private Serializable data;
+    private Serializable auxData;
     private InetAddress target;
 
     public NetworkContainer(NetworkType type, Integer key, Serializable data) {
@@ -53,5 +54,13 @@ public class NetworkContainer implements Serializable {
 
     public void setTarget(InetAddress target) {
         this.target = target;
+    }
+
+    public Serializable getAuxData() {
+        return auxData;
+    }
+
+    public void setAuxData(Serializable auxData) {
+        this.auxData = auxData;
     }
 }

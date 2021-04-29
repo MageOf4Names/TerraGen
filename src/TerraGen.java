@@ -86,7 +86,7 @@ public class TerraGen extends JFrame {
      * Connect to an existing game
      */
     public void joinGame() {
-        addUsers(); // joining the game will eventually not need to initialize tokens, so this bit is temporary
+        //addUsers(); // joining the game will eventually not need to initialize tokens, so this bit is temporary
         //gameRenderer = new GameRenderer(game);
         //add(gameRenderer);
         //pack();
@@ -119,8 +119,9 @@ public class TerraGen extends JFrame {
         gameRenderer = container.getGameRenderer();
         game = container.getGame();
         add(gameRenderer);
-        pack();
+
         Menu menu = new Menu();
         add(menu, BorderLayout.EAST);
+        pack();
     }
 }
