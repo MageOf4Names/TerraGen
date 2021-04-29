@@ -56,7 +56,7 @@ public class GameRenderer extends JComponent {
         BufferedImage bg = null;
         /* Attempts to set the background image */
         try {
-            bg = ImageIO.read(new File("TerraGen/src/backgrounds/mainBackground.png"));
+            bg = ImageIO.read(new File("src/backgrounds/mainBackground.png")); //TerraGen/src/backgrounds/mainBackground.png
         } catch (IOException e) {
             e.printStackTrace();
         }
