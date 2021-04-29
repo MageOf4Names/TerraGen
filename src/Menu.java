@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Menu extends JPanel {
     JButton newToken;
     JButton removeToken;
+    Color labelTextColor = Color.YELLOW;
+    Color labelBGColor = Color.BLACK;
 
     public Menu() {
         setVisible(true);
@@ -27,6 +29,9 @@ public class Menu extends JPanel {
     public void buildDefaultMenu() {
 
         JLabel title = new JLabel("Menu");
+        title.setForeground(labelTextColor);
+        title.setBackground(labelBGColor);
+        title.setOpaque(true);
         this.add(title);
 
         JButton mainMenu = new JButton("Main Menu");
@@ -70,7 +75,13 @@ public class Menu extends JPanel {
             addTokenPanel.setLayout(new BoxLayout(addTokenPanel, BoxLayout.Y_AXIS));
 
             JLabel tokenScaleLabel = new JLabel("Choose Token Scale:     ");
+            tokenScaleLabel.setForeground(labelTextColor);
+            tokenScaleLabel.setBackground(labelBGColor);
+            tokenScaleLabel.setOpaque(true);
             JLabel tokenSizeLabel = new JLabel("" + tokenSize);
+            tokenSizeLabel.setForeground(labelTextColor);
+            tokenSizeLabel.setBackground(labelBGColor);
+            tokenSizeLabel.setOpaque(true);
 
             // slider for deciding token scale
             JSlider tokenScale = new JSlider(1,2,1);
@@ -78,10 +89,14 @@ public class Menu extends JPanel {
                 tokenSize.set(tokenScale.getValue());
                 tokenSizeLabel.setText("" + tokenSize);
             });
+            tokenScale.setOpaque(false);
             tokenScale.setPreferredSize(new Dimension(5,5));
 
             // Field for setting token color
             JLabel tokenCol = new JLabel("Token Color: ");
+            tokenCol.setForeground(labelTextColor);
+            tokenCol.setBackground(labelBGColor);
+            tokenCol.setOpaque(true);
             JTextField setCol = new JTextField(10); // User input field to set token color
             setCol.addActionListener(e3 -> {
                 String col = setCol.getText();
@@ -94,8 +109,17 @@ public class Menu extends JPanel {
 
             // Fields for determining coordinates
             JLabel coordinatesLabel = new JLabel("coordinates: (" + x + ", " + y + ")");
+            coordinatesLabel.setForeground(labelTextColor);
+            coordinatesLabel.setBackground(labelBGColor);
+            coordinatesLabel.setOpaque(true);
             JLabel xLabel = new JLabel("x");
+            xLabel.setForeground(labelTextColor);
+            xLabel.setBackground(labelBGColor);
+            xLabel.setOpaque(true);
             JLabel yLabel = new JLabel("y");
+            yLabel.setForeground(labelTextColor);
+            yLabel.setBackground(labelBGColor);
+            yLabel.setOpaque(true);
             JButton decreaseX = new JButton("-"); // button to decrease xCoordinate
             decreaseX.addActionListener(e4 -> {
                 if (x.get() > 1) {
@@ -132,11 +156,14 @@ public class Menu extends JPanel {
             JPanel setColorPanel = new JPanel();
             setColorPanel.setMaximumSize(new Dimension(200, 50));
             setColorPanel.add(setCol);
+            setColorPanel.setOpaque(false);
+            colorPanel.setOpaque(false);
 
             // Token Coordinates Panel
             JPanel coordinatesPanel = new JPanel();
             coordinatesPanel.setLayout(new BoxLayout(coordinatesPanel, BoxLayout.Y_AXIS));
             coordinatesPanel.setMaximumSize(new Dimension(200,100));
+            coordinatesPanel.setOpaque(false);
 
             // Token X-Coordinates Panel
             JPanel xCoordinatePanel = new JPanel();
@@ -144,6 +171,7 @@ public class Menu extends JPanel {
             xCoordinatePanel.add(xLabel);
             xCoordinatePanel.add(increaseX);
             coordinatesPanel.add(xCoordinatePanel);
+            xCoordinatePanel.setOpaque(false);
 
             // Token Y-Coordinates Panel
             JPanel yCoordinatePanel = new JPanel();
@@ -151,6 +179,7 @@ public class Menu extends JPanel {
             yCoordinatePanel.add(yLabel);
             yCoordinatePanel.add(increaseY);
             coordinatesPanel.add(yCoordinatePanel);
+            yCoordinatePanel.setOpaque(false);
 
             //Finalization of Token
             JButton finalizeToken = new JButton("Finalize token");
@@ -194,6 +223,7 @@ public class Menu extends JPanel {
             addTokenPanel.add(filler2);
             addTokenPanel.add(coordinatesLabel);
             addTokenPanel.add(coordinatesPanel);
+            addTokenPanel.setOpaque(false);
 
             this.add(addTokenPanel);
             this.add(finalizeToken);

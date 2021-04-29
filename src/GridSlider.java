@@ -17,14 +17,17 @@ public class GridSlider extends JComponent {
     private static int tileScale = 30; // default size of a single tile is 50 pixels
     private String bg = "caveBackground.png"; // Default background image.
     private int tileShape = 1; // tileShape = 1 if shape is set to square, tileShape = 2 if shape is set to hexagonal
+    private Color labelTextColor = Color.YELLOW;
+    private Color labelBGColor = Color.BLACK;
 
     public GridSlider() {
         setLayout(new FlowLayout());
 
         JLabel title = new JLabel("Map creator");
         title.setFont(new Font("", Font.BOLD, 25));
+        title.setForeground(labelTextColor);
+        title.setBackground(Color.BLACK);
         title.setOpaque(true);
-        title.setBackground(Color.white);
         add(title);
 
         // whitespace
@@ -36,10 +39,15 @@ public class GridSlider extends JComponent {
 
         // Initialize sliders
         JSlider scaleSlider = new JSlider(20,40, tileScale);
+        scaleSlider.setOpaque(false);
         JSlider gridSlider = new JSlider(10,30,gridScale);
+        gridSlider.setOpaque(false);
 
         // Slider to adjust size of grid scale
         JLabel gridPosition = new JLabel("Grid Scale: " + gridScale + "x" + gridScale);
+        gridPosition.setForeground(labelTextColor);
+        gridPosition.setBackground(labelBGColor);
+        gridPosition.setOpaque(true);
         gridSlider.addChangeListener(event -> {
             gridScale = gridSlider.getValue();
             gridPosition.setText("Grid Scale: " + gridSlider.getValue() + "x" + gridSlider.getValue());
@@ -48,6 +56,9 @@ public class GridSlider extends JComponent {
 
         // Slider to adjust size of tile scale
         JLabel tilePosition = new JLabel("Tile Scale: " + tileScale);
+        tilePosition.setForeground(labelTextColor);
+        tilePosition.setBackground(labelBGColor);
+        tilePosition.setOpaque(true);
         scaleSlider.addChangeListener(event -> {
             tileScale = scaleSlider.getValue();
             tilePosition.setText("Tile Scale: " + scaleSlider.getValue());
@@ -117,7 +128,13 @@ public class GridSlider extends JComponent {
 
         // slider to decide between square or hexagonal grid
         JLabel tileShapeLabel1 = new JLabel("Tile shape is:");
+        tileShapeLabel1.setForeground(labelTextColor);
+        tileShapeLabel1.setBackground(labelBGColor);
+        tileShapeLabel1.setOpaque(true);
         JLabel tileShapeLabel2 = new JLabel("Square");
+        tileShapeLabel2.setForeground(labelTextColor);
+        tileShapeLabel2.setBackground(labelBGColor);
+        tileShapeLabel2.setOpaque(true);
 
         // button to set the slider to square grid
         JButton setSquare = new JButton("Square");
@@ -137,6 +154,9 @@ public class GridSlider extends JComponent {
 
         // button panel to select custom background.
         JLabel bgLabel = new JLabel("Select a Background");
+        bgLabel.setForeground(labelTextColor);
+        bgLabel.setBackground(labelBGColor);
+        bgLabel.setOpaque(true);
 
         // button to set the background to a stone floor.
         JButton setBGStone = new JButton("Cave");
@@ -151,6 +171,8 @@ public class GridSlider extends JComponent {
         setBGWood.setBounds(200,200,50,50);
         setBGWood.addActionListener(e -> {
             bg = "tavernBackground.png";
+            labelTextColor = Color.BLACK;
+            TerraGen.window.pack();
             repaint();
         });
 
@@ -168,6 +190,7 @@ public class GridSlider extends JComponent {
         backgroundPanel.add(setBGWood);
         backgroundPanel.add(setBGNature);
         backgroundPanel.setLayout(new FlowLayout());
+        backgroundPanel.setOpaque(false);
 
         // whitespace
         Box.Filler filler4 = new Box.Filler(
@@ -187,6 +210,7 @@ public class GridSlider extends JComponent {
         sizeSlider.add(decreaseGridScale);
         sizeSlider.add(gridSlider);
         sizeSlider.add(increaseGridScale);
+        sizeSlider.setOpaque(false);
 
         // panel for the scale of each tile
         JPanel tileSlider = new JPanel();
@@ -194,12 +218,14 @@ public class GridSlider extends JComponent {
         tileSlider.add(decreaseTileScale);
         tileSlider.add(scaleSlider);
         tileSlider.add(increaseTileScale);
+        tileSlider.setOpaque(false);
 
         // panel for the shape of the tiles
         JPanel tileShapePanel = new JPanel();
         tileShapePanel.add(setSquare);
         tileShapePanel.add(setHex);
         tileShapePanel.setLayout(new FlowLayout());
+        tileShapePanel.setOpaque(false);
 
         // panel to hold all the filler, sliders and buttons
         JPanel sliderFrame = new JPanel();
@@ -220,6 +246,7 @@ public class GridSlider extends JComponent {
         sliderFrame.add(filler5);
         sliderFrame.add(sliderButton);
         sliderFrame.setLayout(new BoxLayout(sliderFrame, BoxLayout.Y_AXIS));
+        sliderFrame.setOpaque(false);
 
         components.add(sliderFrame);
         components.add(title);
