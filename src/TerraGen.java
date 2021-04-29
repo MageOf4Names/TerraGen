@@ -10,6 +10,7 @@ public class TerraGen extends JFrame {
     protected static TerraGen window;
 
     protected Game game;
+    protected String bg;
 
     private Server server;
     private Client client;
@@ -67,7 +68,7 @@ public class TerraGen extends JFrame {
      */
     public void hostGame() {
         addUsers();
-        gameRenderer = new GameRenderer(game);
+        gameRenderer = new GameRenderer(game, bg);
         add(gameRenderer, BorderLayout.CENTER);
         pack();
 
@@ -103,6 +104,10 @@ public class TerraGen extends JFrame {
 
     public Game getGame() {
         return this.game;
+    }
+
+    public void setBackground(String bgNew) {
+        bg = bgNew;
     }
 
     private void addUsers() {

@@ -1,5 +1,9 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.lang.*;
 
@@ -11,6 +15,7 @@ public class GridSlider extends JComponent {
     private final ArrayList<Component> components = new ArrayList<>();
     private static int gridScale = 20; // default size of the grid is 10x10 tiles
     private static int tileScale = 30; // default size of a single tile is 50 pixels
+    private String bg = "caveBackground.png"; // Default background image.
     private int tileShape = 1; // tileShape = 1 if shape is set to square, tileShape = 2 if shape is set to hexagonal
 
     public GridSlider() {
@@ -18,13 +23,15 @@ public class GridSlider extends JComponent {
 
         JLabel title = new JLabel("Map creator");
         title.setFont(new Font("", Font.BOLD, 25));
+        title.setOpaque(true);
+        title.setBackground(Color.white);
         add(title);
 
         // whitespace
         Box.Filler filler1 = new Box.Filler(
-                new Dimension(50,50),
-                new Dimension(1280, 50),
-                new Dimension(1280, 400));
+                new Dimension(50,15),
+                new Dimension(600, 30),
+                new Dimension(600, 400));
 
 
         // Initialize sliders
@@ -98,15 +105,15 @@ public class GridSlider extends JComponent {
 
         // whitespace
         Box.Filler filler2 = new Box.Filler(
-                new Dimension(50,50),
-                new Dimension(1280, 30),
-                new Dimension(1280, 400));
+                new Dimension(50,30),
+                new Dimension(600, 30),
+                new Dimension(600, 400));
 
         // whitespace
         Box.Filler filler3 = new Box.Filler(
-                new Dimension(50,50),
-                new Dimension(1280, 50),
-                new Dimension(1280, 400));
+                new Dimension(50,30),
+                new Dimension(600, 30),
+                new Dimension(600, 400));
 
         // slider to decide between square or hexagonal grid
         JLabel tileShapeLabel1 = new JLabel("Tile shape is:");
@@ -128,11 +135,51 @@ public class GridSlider extends JComponent {
             tileShapeLabel2.setText("Hexagonal");
         });
 
+        // button panel to select custom background.
+        JLabel bgLabel = new JLabel("Select a Background");
+
+        // button to set the background to a stone floor.
+        JButton setBGStone = new JButton("Cave");
+        setBGStone.setBounds(200,200,50,50);
+        setBGStone.addActionListener(e -> {
+            bg = "caveBackground.png";
+            repaint();
+        });
+
+        // button to set the background to a wooden flooring aesthetic.
+        JButton setBGWood = new JButton("Tavern");
+        setBGWood.setBounds(200,200,50,50);
+        setBGWood.addActionListener(e -> {
+            bg = "tavernBackground.png";
+            repaint();
+        });
+
+        // button to set the background to a natural setting.
+        JButton setBGNature = new JButton("Woods");
+        setBGNature.setBounds(200,200,50,50);
+        setBGNature.addActionListener(e -> {
+            bg = "woodsBackground.png";
+            repaint();
+        });
+
+        // panel for the shape of the tiles
+        JPanel backgroundPanel = new JPanel();
+        backgroundPanel.add(setBGStone);
+        backgroundPanel.add(setBGWood);
+        backgroundPanel.add(setBGNature);
+        backgroundPanel.setLayout(new FlowLayout());
+
         // whitespace
         Box.Filler filler4 = new Box.Filler(
-                new Dimension(50,50),
-                new Dimension(1280, 100),
-                new Dimension(1280, 400));
+                new Dimension(50,30),
+                new Dimension(600, 30),
+                new Dimension(600, 400));
+
+        // whitespace
+        Box.Filler filler5 = new Box.Filler(
+                new Dimension(50,30),
+                new Dimension(600, 30),
+                new Dimension(600, 400));
 
         // panel for the size of the grid
         JPanel sizeSlider = new JPanel();
@@ -168,6 +215,9 @@ public class GridSlider extends JComponent {
         sliderFrame.add(tileShapeLabel2);
         sliderFrame.add(tileShapePanel);
         sliderFrame.add(filler4);
+        sliderFrame.add(bgLabel);
+        sliderFrame.add(backgroundPanel);
+        sliderFrame.add(filler5);
         sliderFrame.add(sliderButton);
         sliderFrame.setLayout(new BoxLayout(sliderFrame, BoxLayout.Y_AXIS));
 
@@ -209,7 +259,6 @@ public class GridSlider extends JComponent {
     private void startGame() {
         hideComponents();
         int height, width;
-        Map map = TerraGen.window.getGame().getMap();
         /* for a square grid */
         if (tileShape == 1) {
             height = gridScale * tileScale + 39;
@@ -220,10 +269,29 @@ public class GridSlider extends JComponent {
         /* for a hexagonal grid */
         else if (tileShape == 2) {
             height = (int) (gridScale * Math.sqrt(3) * 0.5 *  tileScale) + 39 + tileScale / 2;
-            width = gridScale * (int) tileScale + tileScale / 2 + 173;
+            width = gridScale * tileScale + tileScale / 2 + 173;
             TerraGen.window.getGame().setMap(new Map(new HexTileGrid(gridScale, gridScale, tileScale)));
             TerraGen.window.setPreferredSize(new Dimension(width,  height));
         }
+        TerraGen.window.setBackground(bg);
+        bg = null;
+        repaint();
         TerraGen.window.hostGame();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        BufferedImage background;
+        /* Attempts to set the background image */
+        try {
+            if (bg != null) {
+                //TerraGen/src/backgrounds/stoneBackground.png (alternate path)
+                background = ImageIO.read(new File("src/backgrounds/" + bg));
+                g.drawImage(background, 0, 0, null);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
