@@ -113,6 +113,7 @@ public class Game implements Serializable {
     public Token addToken(int x, int y, String color) {
         Token token = map.addToken(x, y, color);
         NetworkContainer container = new NetworkContainer(NetworkType.NEWTOKEN, token);
+        container.setAuxData(new Point(x, y));
         try {
             TerraGen.window.getClient().pushGameChange(container);
         } catch (IOException e) {
@@ -140,7 +141,8 @@ public class Game implements Serializable {
      */
     public void addTokenNoNetworking() {
         Token token = (Token) TerraGen.window.getClient().getNetworkContainer().getData();
-        map.addToken(token.getLocation().getX(), token.getLocation().getY(), token);
+        Point point = (Point) TerraGen.window.getClient().getNetworkContainer().getAuxData();
+        map.addToken(point.getX(), point.getY(), token);
         TerraGen.window.repaint();
     }
 
