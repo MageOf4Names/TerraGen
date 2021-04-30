@@ -1,11 +1,30 @@
 import java.io.Serializable;
 import java.net.InetAddress;
 
+/**
+ * NetworkContainer is used to store all game object in before sending between the Client and Server
+ */
 public class NetworkContainer implements Serializable {
+    /**
+     * Determines what sort of actions the Client and Server need to take in response to the container
+     */
     private NetworkType type;
+    /**
+     * Used to distinguish which object in a list of them we wish to interact with
+     */
     private Integer key;
+    /**
+     * The bulk of the objects are sent in this field.
+     */
     private Serializable data;
+    /**
+     * If there is a use case in which another object is needed to be sent this field is used. Currently for
+     * communicating token creation.
+     */
     private Serializable auxData;
+    /**
+     * If this NetworkContainer is for a Specific client this can be used to record which Client that is
+     */
     private InetAddress target;
 
     public NetworkContainer(NetworkType type, Integer key, Serializable data) {

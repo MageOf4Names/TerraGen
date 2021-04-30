@@ -1,5 +1,8 @@
 import java.io.Serializable;
 
+/**
+ * Redundant class used to store both an instance of the Game and GameRender for sending between Client and Server.
+ */
 public class GameContainer implements Serializable {
     private Game game;
     private GameRenderer gameRenderer;

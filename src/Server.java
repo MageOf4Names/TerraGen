@@ -7,7 +7,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.concurrent.LinkedBlockingQueue;
 
-
+/**
+ * Handles updating game objects among multiple clients
+ */
 public class Server extends Thread {
     private final Game game;
     private int port = 5678;
@@ -34,16 +36,26 @@ public class Server extends Thread {
         new Thread(connectListener).start();
     }
 
+    /**
+     * Listens for new client connections
+     */
     private class ConnectListener extends Thread {
         @Override
         public void run() {
             Socket client;
+            /**
+             * This thread will keep looping to check for new connections
+             */
             for (;;) {
                 client = null;
                 try {
                     client = server.accept();
                     if (client != null) {
                         clients.add(client);
+                        /**
+                         * Once a new connection is added the server will send a request to the first client to
+                         * ask for the current game state.
+                         */
                         if (!dataListeners.isEmpty()) {
                             NetworkContainer networkContainer =
                                     new NetworkContainer(NetworkType.NEWPLAYERREQUEST, client.getInetAddress());
@@ -66,6 +78,10 @@ public class Server extends Thread {
 
     }
 
+
+    /**
+     * A Datalistener is spawned for each client to listen for incoming objects
+     */
     private class DataListener extends Thread {
         private ObjectOutputStream outputStream;
         private ObjectInputStream inputStream;
@@ -81,21 +97,22 @@ public class Server extends Thread {
         public void run() {
             for (;;) {
                 try {
-                    //inputStream.mark(10);
                     System.out.println("In DataListener: before read object");
                     NetworkContainer networkContainer = (NetworkContainer) inputStream.readObject();
                         if (networkContainer != null) {
-                            //inputStream.reset();
-                        //networkContainers.put(networkContainer);
-                        System.out.println("In DataListener: after read object");
-                        if (networkContainer.getType() == NetworkType.NEWPLAYERREQUEST) {
-                            ExclusiveDataWriter exclusiveDataWriter =
-                                    new ExclusiveDataWriter(networkContainer.getTarget(), networkContainer);
-                            exclusiveDataWriter.start();
-                        } else {
-                            DataWriter dataWriter = new DataWriter(client, networkContainer);
-                            dataWriter.start();
-                        }
+                            System.out.println("In DataListener: after read object");
+                            /**
+                             * This if will check if the read object contains the whole game state, and send it to the
+                             * new client.
+                             */
+                            if (networkContainer.getType() == NetworkType.NEWPLAYERREQUEST) {
+                                ExclusiveDataWriter exclusiveDataWriter =
+                                        new ExclusiveDataWriter(networkContainer.getTarget(), networkContainer);
+                                exclusiveDataWriter.start();
+                            } else {
+                                DataWriter dataWriter = new DataWriter(client, networkContainer);
+                                dataWriter.start();
+                            }
 
                         }
 
@@ -130,6 +147,10 @@ public class Server extends Thread {
         }
     }
 
+    /**
+     * This thread is spawned whenever most networked objects are received by the server which will then send it
+     * to all the other clients, except the one that sent it
+     */
     private class DataWriter extends Thread {
         private Socket client;
         private NetworkContainer networkContainer;
@@ -159,6 +180,10 @@ public class Server extends Thread {
         }
     }
 
+    /**
+     * ExclusiveDataWriter will write an object to one specific client, it keeps track of the client by their
+     * InetAddress instead of Socket since Socket is not serializable.
+     */
     private class ExclusiveDataWriter extends Thread {
         private InetAddress client;
         private NetworkContainer networkContainer;

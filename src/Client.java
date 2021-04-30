@@ -7,6 +7,11 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.Socket;
 import java.util.concurrent.LinkedBlockingQueue;
 
+
+/**
+ * Client handles the sending and receiving of objects with the Server, as well as notifying other parts of TerraGen
+ * of changes that must be updated by them
+ */
 public class Client extends Thread {
     private static final int port = 5678;
     private String hostAddress;
@@ -24,6 +29,10 @@ public class Client extends Thread {
 
     }
 
+    /**
+     * This thread handles initialization of ObjectInputStream and ObjectOutputStreams and will then run forever reading
+     * new objects from the server.
+     */
     @Override
     public void run() {
         try {
@@ -42,12 +51,8 @@ public class Client extends Thread {
         while(true) {
             try {
                 System.out.println("Before setting game");
-                //game.setGame((Game) inputStream.readObject());
                 networkContainer = (NetworkContainer) inputStream.readObject();
                 SwingUtilities.invokeAndWait(updateGame);
-                //gameQueue.put(newGame);
-                //gameQueue.take();
-                //TerraGen.window.repaint();
                 System.out.println("After setting game");
             } catch (IOException | ClassNotFoundException | InterruptedException | InvocationTargetException e) {
                 e.printStackTrace();
@@ -77,42 +82,11 @@ public class Client extends Thread {
         this.networkContainer = networkContainer;
     }
 
-    /*
-    public LinkedBlockingQueue<Game> getGameQueue() {
-        return gameQueue;
-    }
+
+    /**
+     * updateGame is called after an object is recieved from the server and examines the NetworkContainer to determine
+     * what to do with the sent class.
      */
-    /*
-    private class DataWriter extends Thread {
-
-        @Override
-        public void run() {
-            try {
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
-
-            while(true) {
-
-            }
-
-        }
-
-
-    }
-
-    private class DataReader extends Thread {
-
-
-        @Override
-        public void run() {
-
-        }
-    }
-     */
-
     final Runnable updateGame = new Runnable() {
         @Override
         public void run() {
@@ -141,7 +115,6 @@ public class Client extends Thread {
                     break;
             }
 
-            //TerraGen.window.repaint();
         }
     };
 }
