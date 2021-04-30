@@ -15,7 +15,7 @@ public class GridSlider extends JComponent {
     private final ArrayList<Component> components = new ArrayList<>();
     private static int gridScale = 20; // default size of the grid is 10x10 tiles
     private static int tileScale = 30; // default size of a single tile is 50 pixels
-    private String bg = "caveBackground.png"; // Default background image.
+    private String bg = "menuScreen.png"; // Default background image.
     private int tileShape = 1; // tileShape = 1 if shape is set to square, tileShape = 2 if shape is set to hexagonal
     private Color labelTextColor = Color.YELLOW;
     private Color labelBGColor = Color.BLACK;
@@ -314,7 +314,7 @@ public class GridSlider extends JComponent {
         try {
             if (bg != null) {
                 //TerraGen/src/backgrounds/stoneBackground.png (alternate path)
-                background = ImageIO.read(new File("src/backgrounds/" + bg));
+                background = ImageIO.read(new File("src/backgrounds/" + bg)); //TerraGen/src/backgrounds/
                 g.drawImage(background, 0, 0, null);
             }
         } catch (IOException e) {
