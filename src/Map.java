@@ -205,4 +205,13 @@ public class Map implements Serializable, ITileGrid {
     public ArrayList<Token> getTokens() {
         return tokens;
     }
+
+    /**
+     * Used to notify map that it needs to remove a token based off Client network container
+     */
+    public void removeToken() {
+        int index = TerraGen.window.getClient().getNetworkContainer().getKey();
+        tokens.remove(index);
+        TerraGen.window.repaint();
+    }
 }

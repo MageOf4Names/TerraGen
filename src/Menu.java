@@ -283,6 +283,12 @@ public class Menu extends JPanel {
             remove.addActionListener(e2 -> {
                 if (selectionMade.get()) {
                     TerraGen.window.game.getMap().tokens.remove(index.get());
+                    try {
+                        TerraGen.window.getClient().pushGameChange(new
+                                NetworkContainer(NetworkType.DELETETOKEN, index.get()));
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
                 }
 
                 for (JButton button : buttons.get()) {

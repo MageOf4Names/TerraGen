@@ -24,6 +24,11 @@ public class NetworkContainer implements Serializable {
         this.data = data;
     }
 
+    public NetworkContainer(NetworkType type, Integer key) {
+        this.type = type;
+        this.key = key;
+    }
+
     public NetworkType getType() {
         return type;
     }
