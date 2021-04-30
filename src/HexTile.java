@@ -18,8 +18,8 @@ public class HexTile extends Tile implements Serializable {
     /**
      * Get the pixel offset to the center of this tile from its location
      *
-     * @param scale
-     * @return
+     * @param scale Scale of the tile
+     * @return Offset used for staggering tiles.
      */
     @Override
     public Point getCenterOffset(float scale) {
@@ -31,8 +31,8 @@ public class HexTile extends Tile implements Serializable {
     /**
      * Get the pixel location of this tile
      *
-     * @param scale
-     * @return
+     * @param scale Scale of a single tile (width)
+     * @return The location of the center pixel of the tile.
      */
     @Override
     public Point getPixelLocation(float scale) {
@@ -60,6 +60,7 @@ public class HexTile extends Tile implements Serializable {
         int t = (int) (r / Math.sqrt(3));
         int s = offset.y - t;
 
+        // Defines the points of the outlining polygon
         int[] pX = {x, x - r, x - r, x, x + r, x + r};
         int[] pY = {y + s, y + t, y - t, y - s, y - t, y + t};
 

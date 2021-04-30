@@ -22,14 +22,10 @@ public class HexTileGrid extends TileGrid implements Serializable {
         }
     }
 
-    public HexTileGrid(int width, int height) {
-        this(width, height, 1);
-    }
-
     /**
      * Get the number of tiles high the grid is
      *
-     * @return
+     * @return Width of the grid in terms of tiles.
      */
     @Override
     public int getWidth() {
@@ -39,7 +35,7 @@ public class HexTileGrid extends TileGrid implements Serializable {
     /**
      * Get the number of tiles wide the grid is
      *
-     * @return
+     * @return Height of the grid in terms of tiles.
      */
     @Override
     public int getHeight() {
@@ -82,9 +78,9 @@ public class HexTileGrid extends TileGrid implements Serializable {
     /**
      * Gets the closest tile to the given point
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x X coordinate of the click.
+     * @param y Y coordinate of the click.
+     * @return Closest tile to the detected click.
      */
     @Override
     public ITile getClosestTile(int x, int y) {
@@ -94,9 +90,9 @@ public class HexTileGrid extends TileGrid implements Serializable {
     /**
      * Get the tile at the given x, y grid coordinates
      *
-     * @param x
-     * @param y
-     * @return
+     * @param x X coordinate on grid
+     * @param y Y coordinate on grid
+     * @return Tile cooresponding to (x, y)
      */
     @Override
     public HexTile getTile(int x, int y) {
@@ -110,8 +106,8 @@ public class HexTileGrid extends TileGrid implements Serializable {
     /**
      * Get the tile at the given x, y grid coordinates
      *
-     * @param location
-     * @return
+     * @param location Location of the point detected
+     * @return The tile corresponding to the indicated point.
      */
     @Override
     public HexTile getTile(Point location) {

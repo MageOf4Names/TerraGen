@@ -82,11 +82,6 @@ public class GameRenderer extends JComponent implements Serializable {
         });
     }
 
-    public void setBGImage(String bgNew) {
-        System.out.println(bgNew + "in GameRender");
-        this.bg = bgNew;
-    }
-
     public void registerMouse() {
         addMouseListener(new MouseListener() {
             @Override
@@ -120,12 +115,12 @@ public class GameRenderer extends JComponent implements Serializable {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        BufferedImage background = null;
+        BufferedImage background;
         /* Attempts to set the background image */
         try {
             if (bg != null) {
                 //TerraGen/src/backgrounds/stoneBackground.png (alternate path)
-                background = ImageIO.read(new File("TerraGen/src/backgrounds/" + bg));
+                background = ImageIO.read(new File("src/backgrounds/" + bg));
                 g.drawImage(background, 0, 0, null);
             }
         } catch (IOException e) {
