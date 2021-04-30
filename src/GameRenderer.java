@@ -82,11 +82,6 @@ public class GameRenderer extends JComponent implements Serializable {
         });
     }
 
-    public void setBGImage(String bgNew) {
-        System.out.println(bgNew + "in GameRender");
-        this.bg = bgNew;
-    }
-
     public void registerMouse() {
         addMouseListener(new MouseListener() {
             @Override
@@ -120,7 +115,7 @@ public class GameRenderer extends JComponent implements Serializable {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        BufferedImage background = null;
+        BufferedImage background;
         /* Attempts to set the background image */
         try {
             if (bg != null) {

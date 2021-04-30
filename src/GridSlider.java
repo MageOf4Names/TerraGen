@@ -18,7 +18,6 @@ public class GridSlider extends JComponent {
     private String bg = "menuScreen.png"; // Default background image.
     private int tileShape = 1; // tileShape = 1 if shape is set to square, tileShape = 2 if shape is set to hexagonal
     private Color labelTextColor = Color.YELLOW;
-    private Color labelBGColor = Color.BLACK;
 
     public GridSlider() {
         setLayout(new FlowLayout());
@@ -46,6 +45,7 @@ public class GridSlider extends JComponent {
         // Slider to adjust size of grid scale
         JLabel gridPosition = new JLabel("Grid Scale: " + gridScale + "x" + gridScale);
         gridPosition.setForeground(labelTextColor);
+        Color labelBGColor = Color.BLACK;
         gridPosition.setBackground(labelBGColor);
         gridPosition.setOpaque(true);
         gridSlider.addChangeListener(event -> {
@@ -263,15 +263,6 @@ public class GridSlider extends JComponent {
     }
 
     /**
-     * retrieve the scale of an individual tile
-     *
-     * @return scale of the grid
-     */
-    public static int getTileScale() {
-        return tileScale;
-    }
-
-    /**
      * hides components so that the next screen will be the board
      */
     private void hideComponents() {
@@ -300,7 +291,13 @@ public class GridSlider extends JComponent {
             TerraGen.window.getGame().setMap(new Map(new HexTileGrid(gridScale, gridScale, tileScale)));
             TerraGen.window.setPreferredSize(new Dimension(width,  height));
         }
-        TerraGen.window.setBackground(bg);
+        /* If statement used to detect if the user has not selected a background.
+           If not, defaults to cave background. */
+        if (bg.equals("menuScreen.png")) {
+            TerraGen.window.setBackground("caveBackground.png");
+        } else {
+            TerraGen.window.setBackground(bg);
+        }
         bg = null;
         repaint();
         TerraGen.window.hostGame();
