@@ -95,7 +95,7 @@ public class GameRenderer extends JComponent implements Serializable {
         try {
             if (bg != null) {
                 //TerraGen/src/backgrounds/stoneBackground.png (alternate path)
-                background = ImageIO.read(new File("src/backgrounds/" + bg));
+                background = ImageIO.read(new File("TerraGen/src/backgrounds/" + bg));
                 g.drawImage(background, 0, 0, null);
             }
         } catch (IOException e) {
