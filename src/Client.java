@@ -135,6 +135,10 @@ public class Client extends Thread {
                     break;
                 case NEWTOKEN:
                     TerraGen.window.game.addTokenNoNetworking();
+                    break;
+                case DELETETOKEN:
+                    TerraGen.window.game.getMap().removeToken();
+                    break;
             }
 
             //TerraGen.window.repaint();
