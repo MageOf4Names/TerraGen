@@ -8,6 +8,8 @@ Douglas Newquist - Deathsnakeprime (deathsnake@protonmail.com)
 
 Michael Vigil - NightmareM (mikey-vigil@live.com)
 
+Matthew Dudek - MattDudek (matthew.dudek@student.nmt.edu)
+
 INSTRUCTIONS FOR USE:
 After copying the TerraGen repository into your host machine, please enter the TerraGen-main folder.
 Inside you will see the src and test directories. From there, you can open the TerraGen project in
